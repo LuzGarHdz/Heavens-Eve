@@ -7,7 +7,6 @@ public class MissionFlagsSO : ScriptableObject
     public bool bosqueCompleted;        // Bosque: regalos a tiempo
     public bool cuartoCompleted;        // Cuarto: peluches correctos
     public bool sotanoBikeCompleted;    // Sótano 1: reparar bicicleta
-    public bool fotoCompleted;         // Foto: misión secundaria de la foto armada
     public bool sotanoFinalCompleted;   // Sótano 2: misión final (la bloqueada)
 
     // ¿Todas las misiones (excepto la final del sótano) están completas?

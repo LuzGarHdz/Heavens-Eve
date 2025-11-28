@@ -8,7 +8,7 @@ public class PlayerInteraction : MonoBehaviour
     public bool interactionsLocked = true; // bloqueado hasta hablar con NPC (escena Bosque). En Cuarto/Sótano puedes desmarcarlo en el Inspector.
 
     private static readonly string[] alwaysAllowed = { "NPC", "Closet", "Bicicleta" };
-
+    public string interactionm;
     void Update()
     {
         if (currentObject != null && Input.GetKeyDown(KeyCode.E))
@@ -66,11 +66,19 @@ public class PlayerInteraction : MonoBehaviour
                 return;
             }
 
+            if (io.objectName == "Closet")
+            {
+                interactionm="[E para abrir]";
+            }else if (io.objectName == "Bicicleta")
+            {
+                interactionm="[E para reparar]";
+            }
+
             if (io.objectName == "Closet" || io.objectName == "Bicicleta")
             {
                 Debug.Log($"[PlayerInteraction] Showing prompt for {io.objectName}");
                 if (InteractionManager.Instance != null)
-                    InteractionManager.Instance.ShowMessage("[E para abrir]");
+                    InteractionManager.Instance.ShowMessage(interactionm);
             }
             else
             {
