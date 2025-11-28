@@ -4,62 +4,40 @@ using UnityEngine.SceneManagement;
 
 public class PasarNivelPorPosicion : MonoBehaviour
 {
-    [SerializeField] private string nombreSiguienteNivel;  // Nombre de la escena destino
-    [SerializeField] private float limiteX = 10f;          // Coordenada X que el jugador debe alcanzar
-    public static PasarNivelPorPosicion instance;
+    [SerializeField] private string nombreSiguienteNivel = "Casa";
+    [SerializeField] private float limiteX = 10f;
     [SerializeField] Animator transitionAnim;
 
     private Transform jugador;
 
-    private void Awake()
-    {
-        if (instance== null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
     void Start()
     {
-        // Busca el jugador por tag
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
-        {
             jugador = playerObj.transform;
-
-
-        }
         else
-        {
             Debug.LogError("No se encontró un objeto con el tag 'Player'");
-        }
     }
 
     void Update()
     {
         if (jugador == null) return;
 
-        // Si el jugador supera la coordenada X indicada
+        // Bloquear salida si no ha completado la misión
+        if (!GameManager.Instance.missionCompleted) return;
+
         if (jugador.position.x >= limiteX - 0.1f)
         {
             StartCoroutine(LoadLevel());
-            enabled = false; // evita múltiples llamadas
+            enabled = false;
         }
     }
 
     IEnumerator LoadLevel()
     {
-        transitionAnim.SetTrigger("End");
+        if (transitionAnim != null) transitionAnim.SetTrigger("End");
         yield return new WaitForSeconds(1f);
-        nombreSiguienteNivel = ("Casa");
         SceneManager.LoadScene(nombreSiguienteNivel);
-        transitionAnim.SetTrigger("Start");
-
+        if (transitionAnim != null) transitionAnim.SetTrigger("Start");
     }
-
-
 }

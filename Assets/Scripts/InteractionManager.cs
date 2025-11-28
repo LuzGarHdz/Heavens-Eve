@@ -7,28 +7,37 @@ public class InteractionManager : MonoBehaviour
 
     public GameObject textPanel; // referencia al panel del texto (UI)
     public TMP_Text textUI;      // referencia al componente TMP_Text
-    public TMP_Text interaction_message;      
+    public TMP_Text interaction_message;
 
     private void Awake()
     {
         Instance = this;
-        textPanel.SetActive(false);
+        if (textPanel != null) textPanel.SetActive(false);
     }
 
     public void ShowInteraction(string text)
     {
-        interaction_message.text = text;
-
+        if (interaction_message != null)
+            interaction_message.text = text;
     }
 
     public void ShowMessage(string message)
     {
-        textPanel.SetActive(true);
-        textUI.text = message;
+        if (textPanel != null) textPanel.SetActive(true);
+        if (textUI != null) textUI.text = message;
     }
 
     public void HideMessage()
     {
-        textPanel.SetActive(false);
+        if (textPanel != null) textPanel.SetActive(false);
+    }
+
+    // Nuevo: avisar al GameManager cuando se hable con el NPC
+    public void NotifyTalkedToNPC()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.OnTalkedToNPC();
+        }
     }
 }

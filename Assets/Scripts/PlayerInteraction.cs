@@ -1,48 +1,60 @@
 using UnityEngine;
 
-
 public class PlayerInteraction : MonoBehaviour
 {
-
     private InteractableObject currentObject; // objeto con el que puede interactuar
+    [Header("Lock")]
+    public bool interactionsLocked = true; // bloqueado hasta hablar con NPC
 
     void Update()
     {
-        // Si el jugador está cerca de un objeto y presiona E
         if (currentObject != null && Input.GetKeyDown(KeyCode.E))
         {
-            currentObject.Interact();
+            // Permitir siempre hablar con NPC; bloquear otros si aún no inicia misión
+            if (currentObject.objectName == "NPC")
+            {
+                currentObject.Interact();
+            }
+            else
+            {
+                if (!interactionsLocked)
+                {
+                    currentObject.Interact();
+                }
+                else
+                {
+                    InteractionManager.Instance.ShowMessage("Habla con el NPC primero [E]");
+                }
+            }
         }
     }
 
-    // Cuando entra en el área del objeto
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Interactable"))
         {
             currentObject = collision.GetComponent<InteractableObject>();
-            InteractionManager.Instance.ShowMessage("[E para abrir]");
+            if (!interactionsLocked)
+                InteractionManager.Instance.ShowMessage("[E para abrir]");
+            else
+                InteractionManager.Instance.ShowMessage("Habla con el NPC primero [E]");
         }
         else if (collision.CompareTag("NPC"))
         {
-            currentObject=collision.GetComponent<InteractableObject>();
+            currentObject = collision.GetComponent<InteractableObject>();
             InteractionManager.Instance.ShowMessage("[E para hablar]");
-
         }
     }
 
-    // Cuando sale del área del objeto
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Interactable"))
+        if (collision.CompareTag("Interactable") || collision.CompareTag("NPC"))
         {
-            currentObject = null;
-            InteractionManager.Instance.HideMessage();
-        }
-        else if (collision.CompareTag("NPC"))
-        {
-            currentObject=null;
-            InteractionManager.Instance.HideMessage();
+            if (currentObject != null && currentObject.gameObject == collision.gameObject)
+            {
+                currentObject = null;
+                InteractionManager.Instance.HideMessage();
+            }
         }
     }
 }
