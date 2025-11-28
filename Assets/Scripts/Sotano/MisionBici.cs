@@ -1,0 +1,116 @@
+using System.Collections;
+using UnityEngine;
+
+public class BicycleRepairMission : MonoBehaviour
+{
+    [Header("Panel/UI")]
+    public GameObject panel;                 // HUD del minijuego (inactivo al inicio)
+    public DragAndDropMinigame minigame;     // Controlador
+    public bool pauseOnOpen = true;
+
+    [Header("Diálogo")]
+    public DialogueUI dialogueUI;
+    [TextArea] public string[] successLines = { "La bicicleta ha quedado como nueva." };
+    [TextArea] public string[] failedLines = { "No lograste repararla a tiempo. Inténtalo de nuevo." };
+
+    [Header("Flags globales")]
+    public MissionFlagsSO flags;             // Marca sotanoBikeCompleted al completar
+
+    private bool opening = false;
+
+    private void Awake()
+    {
+        if (panel != null) panel.SetActive(false);
+        Debug.Log($"[BicycleRepairMission] Awake. panel={(panel ? panel.name : "null")} minigame={(minigame ? minigame.name : "null")}");
+    }
+
+    public void Open()
+    {
+        if (opening)
+        {
+            Debug.LogWarning("[BicycleRepairMission] Open called but already opening.");
+            return;
+        }
+        opening = true;
+
+        Debug.Log($"[BicycleRepairMission] Open. pauseOnOpen={pauseOnOpen}");
+        if (pauseOnOpen) Time.timeScale = 0f;
+
+        // Ocultar cualquier diálogo previo
+        if (dialogueUI != null) dialogueUI.HideImmediate();
+
+        if (panel != null)
+        {
+            panel.SetActive(true);
+            Debug.Log("[BicycleRepairMission] Panel activated");
+        }
+        else
+        {
+            Debug.LogError("[BicycleRepairMission] Panel is null; cannot open.");
+        }
+
+        if (minigame == null)
+        {
+            Debug.LogError("[BicycleRepairMission] minigame is null; cannot start.");
+            return;
+        }
+
+        // Enlazar callbacks
+        minigame.OnCompleted = OnMinigameCompleted;
+        minigame.OnFailed = OnMinigameFailed;
+
+        Debug.Log("[BicycleRepairMission] Starting minigame...");
+        minigame.StartMinigame();
+    }
+
+    public void Close()
+    {
+        opening = false;
+
+        Debug.Log("[BicycleRepairMission] Close");
+        if (panel != null) panel.SetActive(false);
+        if (pauseOnOpen) Time.timeScale = 1f;
+    }
+
+    private void OnMinigameCompleted()
+    {
+        Debug.Log("[BicycleRepairMission] Minigame COMPLETED");
+        if (flags != null)
+        {
+            flags.sotanoBikeCompleted = true;
+            Debug.Log("[BicycleRepairMission] Flags updated: sotanoBikeCompleted=true");
+        }
+        else
+        {
+            Debug.LogWarning("[BicycleRepairMission] flags is null; cannot mark completion globally.");
+        }
+
+        Close();
+
+        if (dialogueUI != null && successLines != null && successLines.Length > 0)
+        {
+            Debug.Log("[BicycleRepairMission] Showing success dialogue");
+            StartCoroutine(dialogueUI.ShowLines(successLines));
+        }
+        else
+        {
+            Debug.LogWarning("[BicycleRepairMission] No dialogueUI or successLines; skipping success message.");
+        }
+    }
+
+    private void OnMinigameFailed()
+    {
+        Debug.Log("[BicycleRepairMission] Minigame FAILED");
+        Close();
+
+        if (dialogueUI != null && failedLines != null && failedLines.Length > 0)
+        {
+            Debug.Log("[BicycleRepairMission] Showing failed dialogue");
+            StartCoroutine(dialogueUI.ShowLines(failedLines));
+        }
+        else
+        {
+            Debug.LogWarning("[BicycleRepairMission] No dialogueUI or failedLines; skipping fail message.");
+        }
+    }
+}

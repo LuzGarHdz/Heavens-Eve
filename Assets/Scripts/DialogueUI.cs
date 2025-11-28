@@ -14,12 +14,7 @@ public class DialogueUI : MonoBehaviour
     [Header("Typewriter")]
     public float charsPerSecond = 40f;
     public bool useUnscaledTime = true;
-
-    [Tooltip("Ignora input inicial (seg) al abrir diálogos para no consumir teclas previas.")]
     public float inputBlockSecondsOnStart = 0.12f;
-
-    // Importante: NO incluimos Mouse0 para que el click del botón no avance el diálogo ni confirme.
-    [Tooltip("Teclas que avanzan o hacen skip en el diálogo (sin Mouse0).")]
     public KeyCode[] advanceKeys = { KeyCode.Space, KeyCode.Return, KeyCode.E };
 
     private CanvasGroup group;
@@ -28,16 +23,32 @@ public class DialogueUI : MonoBehaviour
     private float unblockTime;
 
     public bool IsRunning { get; private set; }
-    public bool ConfirmResult { get; private set; } // Resultado de confirmación (true = Sí)
+    public bool ConfirmResult { get; private set; }
 
-    private void Awake()
+    void Awake()
     {
-        group = GetComponent<CanvasGroup>();
+        EnsureGroup();
         HideImmediate();
+    }
+
+    // Inicialización perezosa
+    private void EnsureGroup()
+    {
+        if (group == null)
+        {
+            group = GetComponent<CanvasGroup>();
+            if (group == null)
+            {
+                Debug.LogError("[DialogueUI] Falta CanvasGroup en el mismo GameObject.");
+            }
+        }
     }
 
     public void ShowImmediate()
     {
+        EnsureGroup();
+        if (group == null) return;
+
         group.alpha = 1f;
         group.blocksRaycasts = true;
         group.interactable = true;
@@ -47,6 +58,9 @@ public class DialogueUI : MonoBehaviour
 
     public void HideImmediate()
     {
+        EnsureGroup();
+        if (group == null) return;
+
         group.alpha = 0f;
         group.blocksRaycasts = false;
         group.interactable = false;
@@ -71,24 +85,19 @@ public class DialogueUI : MonoBehaviour
         yield return ShowLinesInternal(lines);
     }
 
-    // Líneas + confirmación en el MISMO cuadro de diálogo
     public IEnumerator ShowLinesThenConfirm(string[] lines, string confirmPrompt, KeyCode yesKey, KeyCode noKey)
     {
         yield return ShowLinesInternal(lines);
 
-        // pequeña espera para no reusar la última tecla de avance
         if (useUnscaledTime) yield return new WaitForSecondsRealtime(0.08f);
         else yield return new WaitForSeconds(0.08f);
         yield return null;
 
-        // Mostrar confirmación en el mismo texto
-        if (dialogText != null) dialogText.text = confirmPrompt;
+        if (dialogText) dialogText.text = confirmPrompt;
         if (continueHint) continueHint.gameObject.SetActive(false);
 
-        // Esperar SÍ/NO (solo teclado)
         yield return WaitForYesNo(yesKey, noKey);
 
-        // Cerrar diálogo
         HideImmediate();
         IsRunning = false;
     }
@@ -97,7 +106,6 @@ public class DialogueUI : MonoBehaviour
     {
         if (lines == null) lines = System.Array.Empty<string>();
 
-        // Cancela cualquier flujo previo y bloquea input inicial
         CancelDialogue();
         float now = useUnscaledTime ? Time.unscaledTime : Time.time;
         unblockTime = now + Mathf.Max(0f, inputBlockSecondsOnStart);
@@ -108,7 +116,6 @@ public class DialogueUI : MonoBehaviour
         for (int i = 0; i < lines.Length; i++)
         {
             yield return TypeLine(lines[i]);
-
             if (continueHint) continueHint.gameObject.SetActive(true);
             yield return WaitForAdvance();
             if (continueHint) continueHint.gameObject.SetActive(false);
@@ -121,7 +128,6 @@ public class DialogueUI : MonoBehaviour
 
         dialogText.text = "";
         skippingType = false;
-
         float delay = charsPerSecond > 0 ? 1f / charsPerSecond : 0f;
 
         for (int i = 0; i < line.Length; i++)
@@ -151,13 +157,12 @@ public class DialogueUI : MonoBehaviour
 
     private IEnumerator WaitForAdvance()
     {
-        yield return null; // 1 frame por robustez
-
+        yield return null;
         while (true)
         {
             if (IsAdvanceInputPressed())
             {
-                yield return null; // evitar doble consumo
+                yield return null;
                 yield break;
             }
             yield return null;
@@ -179,9 +184,7 @@ public class DialogueUI : MonoBehaviour
     private IEnumerator WaitForYesNo(KeyCode yesKey, KeyCode noKey)
     {
         ConfirmResult = false;
-
-        yield return null; // 1 frame
-
+        yield return null;
         while (true)
         {
             if (Input.GetKeyDown(yesKey))
