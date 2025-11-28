@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Bosque.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
-    path: Assets/Scenes/Casa.unity
+    path: Assets/Scenes/Exterior.unity
     guid: 72d1e65dcadcf314c845dec23355783f
   - enabled: 1
-    path: Assets/Scenes/Interior.unity
+    path: Assets/Scenes/Sala.unity
     guid: 104178e295471514aa63cd79dd6d0ea3
   - enabled: 1
     path: Assets/Scenes/Cuarto.unity
