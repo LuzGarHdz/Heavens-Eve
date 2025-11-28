@@ -43,6 +43,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 1077191691
+    locked: 0
+  - name: Player
+    uniqueID: 3399754059
+    locked: 0
+  - name: FrontObjects
+    uniqueID: 1653867203
+    locked: 0
   m_RenderingLayers:
   - Default
   - Particles

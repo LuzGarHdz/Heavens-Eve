@@ -1,5 +1,7 @@
 using UnityEngine;
-public class GiftData : MonoBehaviour
+
+[CreateAssetMenu(fileName = "NewGift", menuName = "HeavensEve/Gift")]
+public class GiftData : ScriptableObject
 {
     public string giftName = "Regalo";
     [TextArea] public string description;

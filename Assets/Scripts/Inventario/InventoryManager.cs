@@ -37,6 +37,7 @@ public class InventoryManager : MonoBehaviour
                 slotImages[i].enabled = false;
             }
         }
+        detailImage.enabled = false;
 
         if (inventoryPanel != null)
             inventoryPanel.SetActive(false);
@@ -110,6 +111,7 @@ public class InventoryManager : MonoBehaviour
 
     private void ShowDetail(GiftData gift)
     {
+        detailImage.enabled = true;
         if (detailImage != null)
             detailImage.sprite = gift.detailSprite != null ? gift.detailSprite : gift.iconSprite;
 
@@ -122,6 +124,7 @@ public class InventoryManager : MonoBehaviour
 
     public void ClearDetail()
     {
+        detailImage.enabled = false;
         if (detailImage != null) detailImage.sprite = null;
         if (detailNameText != null) detailNameText.text = "";
         if (detailDescriptionText != null) detailDescriptionText.text = "";

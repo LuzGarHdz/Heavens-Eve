@@ -24,7 +24,10 @@ public class PasarNivelPorPosicion : MonoBehaviour
         if (jugador == null) return;
 
         // Bloquear salida si no ha completado la misión
-        if (!GameManager.Instance.missionCompleted) return;
+        if (GameManager.Instance != null)
+        {
+            if (!GameManager.Instance.missionCompleted) return;
+        }
 
         if (jugador.position.x >= limiteX - 0.1f)
         {

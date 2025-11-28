@@ -44,5 +44,16 @@ public class PauseMenu : MonoBehaviour
             player.GetComponent<Movement>().enabled = false;
     }
 
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1f; // Asegurarse de que el tiempo esté normalizado
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 
 }
