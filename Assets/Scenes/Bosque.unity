@@ -337,7 +337,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 40997825}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 719981551}
+        m_TargetAssemblyTypeName: GameOverUI, Assembly-CSharp
+        m_MethodName: OnMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &40997825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,7 +705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &310233722
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1151,6 +1163,7 @@ MonoBehaviour:
   giftData: {fileID: 11400000, guid: 725dc6cf2e3b9134780ddc24423d9cac, type: 2}
   closetUI: {fileID: 0}
   bicycleMission: {fileID: 0}
+  tocadiscosMission: {fileID: 0}
   isDisabled: 0
 --- !u!61 &410594536
 BoxCollider2D:
@@ -1287,7 +1300,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &451422549
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1548,7 +1561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &478833157
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1966,7 +1979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &633385949
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2106,7 +2119,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 662417538}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 719981551}
+        m_TargetAssemblyTypeName: GameOverUI, Assembly-CSharp
+        m_MethodName: OnQuit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &662417538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2507,6 +2532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameOverUI
   panel: {fileID: 719981547}
+  mainmenu: {fileID: 451422548}
 --- !u!1 &729559832
 GameObject:
   m_ObjectHideFlags: 0
@@ -3182,9 +3208,9 @@ RectTransform:
   - {fileID: 633385949}
   - {fileID: 451422549}
   - {fileID: 1280557574}
-  - {fileID: 719981548}
   - {fileID: 1133419519}
   - {fileID: 1591764513}
+  - {fileID: 719981548}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3485,6 +3511,7 @@ MonoBehaviour:
   giftData: {fileID: 0}
   closetUI: {fileID: 0}
   bicycleMission: {fileID: 0}
+  tocadiscosMission: {fileID: 0}
   isDisabled: 0
 --- !u!1 &1077562496
 GameObject:
@@ -3503,7 +3530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1077562497
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3641,7 +3668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1133419519
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3984,7 +4011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1280557574
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4213,6 +4240,7 @@ MonoBehaviour:
   giftData: {fileID: 11400000, guid: 72a6ba33d33829a469a02c35ef4ebae1, type: 2}
   closetUI: {fileID: 0}
   bicycleMission: {fileID: 0}
+  tocadiscosMission: {fileID: 0}
   isDisabled: 0
 --- !u!1 &1328393083
 GameObject:
@@ -4433,6 +4461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   interactionsLocked: 1
+  interactionm: 
 --- !u!114 &1328393092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4473,7 +4502,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1336750203
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4674,7 +4703,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1367246403}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 719981551}
+        m_TargetAssemblyTypeName: GameOverUI, Assembly-CSharp
+        m_MethodName: OnRestart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1367246403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4731,7 +4772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1401155342
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5064,7 +5105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1591764513
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5709,7 +5750,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1744958954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5758,7 +5799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1783671122
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12021,6 +12062,7 @@ MonoBehaviour:
   giftData: {fileID: 11400000, guid: ee2ab75d1bf214442ad67d74b574aeac, type: 2}
   closetUI: {fileID: 0}
   bicycleMission: {fileID: 0}
+  tocadiscosMission: {fileID: 0}
   isDisabled: 0
 --- !u!61 &2143710216
 BoxCollider2D:

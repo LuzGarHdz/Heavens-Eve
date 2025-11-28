@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
 
 
 
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -24,12 +25,18 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        if(SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            SceneManager.LoadScene("Bosque");
+        }
+        else { 
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
+            if (player != null)
             player.GetComponent<Movement>().enabled = true;
+        }
     }
 
     void PauseGame()

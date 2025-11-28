@@ -37,7 +37,7 @@ public class InventoryManager : MonoBehaviour
                 slotImages[i].enabled = false;
             }
         }
-        detailImage.enabled = false;
+        if (detailImage) detailImage.enabled = false;
 
         if (inventoryPanel != null)
             inventoryPanel.SetActive(false);
@@ -89,14 +89,62 @@ public class InventoryManager : MonoBehaviour
             if (slotData[i] == null)
             {
                 slotData[i] = gift;
-                slotImages[i].sprite = gift.iconSprite;
-                slotImages[i].enabled = true;
+                if (slotImages[i] != null)
+                {
+                    slotImages[i].sprite = gift.iconSprite;
+                    slotImages[i].enabled = true;
+                }
                 return;
             }
         }
 
-        // Inventario lleno: podrías mostrar un mensaje
         Debug.Log("Inventario lleno (4/4).");
+    }
+
+    // NUEVO: eliminar un regalo por referencia de GiftData
+    public bool RemoveGift(GiftData gift)
+    {
+        if (gift == null) return false;
+
+        for (int i = 0; i < slotData.Length; i++)
+        {
+            if (slotData[i] == gift)
+            {
+                slotData[i] = null;
+                if (slotImages[i] != null)
+                {
+                    slotImages[i].sprite = null;
+                    slotImages[i].enabled = false;
+                }
+                // Limpiar detalle si estaba mostrando este regalo
+                if (detailImage != null && detailImage.sprite == (gift.detailSprite != null ? gift.detailSprite : gift.iconSprite))
+                {
+                    ClearDetail();
+                }
+                Debug.Log($"[InventoryManager] RemoveGift: {gift.giftName} eliminado del slot {i}.");
+                return true;
+            }
+        }
+
+        Debug.Log($"[InventoryManager] RemoveGift: {gift.giftName} no encontrado en inventario.");
+        return false;
+    }
+
+    // NUEVO: eliminar un regalo por nombre (case-sensitive)
+    public bool RemoveGiftByName(string giftName)
+    {
+        if (string.IsNullOrEmpty(giftName)) return false;
+
+        for (int i = 0; i < slotData.Length; i++)
+        {
+            var gift = slotData[i];
+            if (gift != null && gift.giftName == giftName)
+            {
+                return RemoveGift(gift);
+            }
+        }
+        Debug.Log($"[InventoryManager] RemoveGiftByName: '{giftName}' no encontrado en inventario.");
+        return false;
     }
 
     // Llamado por los botones de cada slot
@@ -111,9 +159,11 @@ public class InventoryManager : MonoBehaviour
 
     private void ShowDetail(GiftData gift)
     {
-        detailImage.enabled = true;
         if (detailImage != null)
+        {
+            detailImage.enabled = true;
             detailImage.sprite = gift.detailSprite != null ? gift.detailSprite : gift.iconSprite;
+        }
 
         if (detailNameText != null)
             detailNameText.text = gift.giftName;
@@ -124,8 +174,11 @@ public class InventoryManager : MonoBehaviour
 
     public void ClearDetail()
     {
-        detailImage.enabled = false;
-        if (detailImage != null) detailImage.sprite = null;
+        if (detailImage != null)
+        {
+            detailImage.enabled = false;
+            detailImage.sprite = null;
+        }
         if (detailNameText != null) detailNameText.text = "";
         if (detailDescriptionText != null) detailDescriptionText.text = "";
     }

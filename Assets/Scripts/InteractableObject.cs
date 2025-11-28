@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
+
     public string objectName = "Regalo";
     public GiftData giftData; // (sigue para inventario, si lo usas en otras escenas)
     public ClosetUI closetUI; // Asigna si este objeto es el closet
 
     [Header("Missions")]
     public BicycleRepairMission bicycleMission; // Asigna para el caso "Bicicleta"
+    public TocadiscosMission tocadiscosMission;
+// Asigna para el caso "Tocadiscos"
 
     [Header("Estado")]
     public bool isDisabled = false;     // si está deshabilitado, no muestra prompt ni interactúa
@@ -48,6 +51,14 @@ public class InteractableObject : MonoBehaviour
             Debug.Log("[InteractableObject] Opening Bicycle mission");
             if (bicycleMission != null) bicycleMission.Open();
             else Debug.LogWarning("InteractableObject: bicycleMission no asignado.");
+            return;
+        }
+
+        if (objectName == "Tocadiscos")
+        {
+            Debug.Log("[InteractableObject] Tocadiscos Interact");
+            if (tocadiscosMission != null) tocadiscosMission.TryActivate();
+            else Debug.LogWarning("[InteractableObject] tocadiscosMission no asignado.");
             return;
         }
 
