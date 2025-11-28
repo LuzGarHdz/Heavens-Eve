@@ -4,10 +4,12 @@ using UnityEngine;
 public class PlushData : ScriptableObject
 {
     public string plushName = "Peluche";
-    [TextArea] public string[] dialogLines;   // Diálogos que cuenta la hija sobre este peluche (click para avanzar)
-    public bool isNegative = false;           // Si es negativo, quita vida al elegirlo
-    public int damageOnPick = 1;              // Cuánta vida quita (por defecto 1 toque)
+    [TextArea] public string[] dialogLines;
+    public bool isNegative = false;      // Si es negativo, quita vida
+    public int damageOnPick = 1;
 
-    public Sprite iconSprite;                 // Sprite para el botón/slot del closet
-    public Sprite detailSprite;               // Sprite grande para el panel de detalle (opcional)
+    public bool isCorrect = false;       // NUEVO: marca este peluche como "correcto" (opcional, por si no quieres usar la lista en ClosetUI)
+
+    public Sprite iconSprite;
+    public Sprite detailSprite;
 }

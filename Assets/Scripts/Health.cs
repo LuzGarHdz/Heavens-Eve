@@ -10,6 +10,11 @@ public class Health : MonoBehaviour
     [Header("UI")]
     public Image[] hearts; // Asignar 5 sprites/imagenes representando cada "vida/toque"
 
+    [Header("Fallback (sin GameManager)")]
+    public GameOverUI fallbackGameOverUI;      // Opcional: arrastra tu panel de Game Over
+    public Movement playerMovement;            // Arrastra Movement del jugador
+    public PlayerInteraction playerInteraction;// Arrastra PlayerInteraction del jugador
+
     public void ResetHealth()
     {
         currentHits = 0;
@@ -24,7 +29,25 @@ public class Health : MonoBehaviour
         if (currentHits >= maxHits)
         {
             // Muerte del jugador
-            GameManager.Instance.OnPlayerDeath();
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnPlayerDeath();
+            }
+            else
+            {
+                // Fallback local si no hay GameManager (como en la escena Cuarto)
+                if (playerMovement != null) playerMovement.enabled = false;
+                if (playerInteraction != null) playerInteraction.enabled = false;
+                Time.timeScale = 0f;
+                if (fallbackGameOverUI != null)
+                {
+                    fallbackGameOverUI.Show();
+                }
+                else
+                {
+                    Debug.LogWarning("[Health] Player murió, pero no hay GameManager ni fallbackGameOverUI asignado.");
+                }
+            }
         }
     }
 
@@ -32,10 +55,11 @@ public class Health : MonoBehaviour
     {
         if (hearts == null || hearts.Length == 0) return;
 
-        // Mostrar corazones llenos vs vacíos (si usas sprites diferentes)
+        // Mostrar corazones habilitados/deshabilitados según los toques
         for (int i = 0; i < hearts.Length; i++)
         {
-            hearts[i].enabled = i < (maxHits - currentHits);
+            if (hearts[i] != null)
+                hearts[i].enabled = i < (maxHits - currentHits);
         }
     }
 }

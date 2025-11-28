@@ -3,22 +3,27 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     private InteractableObject currentObject; // objeto con el que puede interactuar
+
     [Header("Lock")]
-    public bool interactionsLocked = true; // bloqueado hasta hablar con NPC
+    public bool interactionsLocked = true; // Bosque: true; En Cuarto puedes desmarcarlo en el Inspector.
+
+    // Objetos que SIEMPRE pueden interactuar aunque haya lock
+    private static readonly string[] alwaysAllowed = { "NPC", "Closet" };
 
     void Update()
     {
         if (currentObject != null && Input.GetKeyDown(KeyCode.E))
         {
-            // Permitir siempre hablar con NPC; bloquear otros si aún no inicia misión
-            if (currentObject.objectName == "NPC")
+            if (IsAlwaysAllowed(currentObject.objectName))
             {
+                Debug.Log($"[PlayerInteraction] Interact con {currentObject.objectName}");
                 currentObject.Interact();
             }
             else
             {
                 if (!interactionsLocked)
                 {
+                    Debug.Log($"[PlayerInteraction] Interact (sin lock) con {currentObject.objectName}");
                     currentObject.Interact();
                 }
                 else
@@ -34,10 +39,14 @@ public class PlayerInteraction : MonoBehaviour
         if (collision.CompareTag("Interactable"))
         {
             currentObject = collision.GetComponent<InteractableObject>();
-            if (!interactionsLocked)
-                InteractionManager.Instance.ShowMessage("[E para abrir]");
-            else
-                InteractionManager.Instance.ShowMessage("Habla con el NPC primero [E]");
+
+            if (currentObject != null)
+            {
+                if (IsAlwaysAllowed(currentObject.objectName))
+                    InteractionManager.Instance.ShowMessage("[E para abrir]");
+                else
+                    InteractionManager.Instance.ShowMessage(!interactionsLocked ? "[E para abrir]" : "Habla con el NPC primero [E]");
+            }
         }
         else if (collision.CompareTag("NPC"))
         {
@@ -56,5 +65,15 @@ public class PlayerInteraction : MonoBehaviour
                 InteractionManager.Instance.HideMessage();
             }
         }
+    }
+
+    private bool IsAlwaysAllowed(string name)
+    {
+        if (string.IsNullOrEmpty(name)) return false;
+        for (int i = 0; i < alwaysAllowed.Length; i++)
+        {
+            if (alwaysAllowed[i] == name) return true;
+        }
+        return false;
     }
 }

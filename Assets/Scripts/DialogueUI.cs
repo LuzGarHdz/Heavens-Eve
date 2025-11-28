@@ -7,18 +7,30 @@ using TMPro;
 public class DialogueUI : MonoBehaviour
 {
     [Header("Refs")]
-    public Image dialogBackground;     // Asigna aquí tu sprite de la caja de diálogo (Image UI)
-    public TMP_Text dialogText;        // Texto del diálogo
-    public TMP_Text continueHint;      // “Click para continuar” (opcional)
+    public Image dialogBackground;
+    public TMP_Text dialogText;
+    public TMP_Text continueHint;
 
-    [Header("Ajustes")]
-    public float charsPerSecond = 40f; // Velocidad de tipeo
+    [Header("Typewriter")]
+    public float charsPerSecond = 40f;
     public bool useUnscaledTime = true;
 
-    private CanvasGroup group;
-    private bool running = false;
+    [Tooltip("Ignora input inicial (seg) al abrir diálogos para no consumir teclas previas.")]
+    public float inputBlockSecondsOnStart = 0.12f;
 
-    void Awake()
+    // Importante: NO incluimos Mouse0 para que el click del botón no avance el diálogo ni confirme.
+    [Tooltip("Teclas que avanzan o hacen skip en el diálogo (sin Mouse0).")]
+    public KeyCode[] advanceKeys = { KeyCode.Space, KeyCode.Return, KeyCode.E };
+
+    private CanvasGroup group;
+    private Coroutine activeCoroutine;
+    private bool skippingType;
+    private float unblockTime;
+
+    public bool IsRunning { get; private set; }
+    public bool ConfirmResult { get; private set; } // Resultado de confirmación (true = Sí)
+
+    private void Awake()
     {
         group = GetComponent<CanvasGroup>();
         HideImmediate();
@@ -42,41 +54,85 @@ public class DialogueUI : MonoBehaviour
         if (continueHint) continueHint.gameObject.SetActive(false);
     }
 
+    public void CancelDialogue()
+    {
+        if (activeCoroutine != null)
+        {
+            StopCoroutine(activeCoroutine);
+            activeCoroutine = null;
+        }
+        IsRunning = false;
+        skippingType = false;
+        HideImmediate();
+    }
+
     public IEnumerator ShowLines(string[] lines)
     {
-        if (lines == null || lines.Length == 0) yield break;
+        yield return ShowLinesInternal(lines);
+    }
+
+    // Líneas + confirmación en el MISMO cuadro de diálogo
+    public IEnumerator ShowLinesThenConfirm(string[] lines, string confirmPrompt, KeyCode yesKey, KeyCode noKey)
+    {
+        yield return ShowLinesInternal(lines);
+
+        // pequeña espera para no reusar la última tecla de avance
+        if (useUnscaledTime) yield return new WaitForSecondsRealtime(0.08f);
+        else yield return new WaitForSeconds(0.08f);
+        yield return null;
+
+        // Mostrar confirmación en el mismo texto
+        if (dialogText != null) dialogText.text = confirmPrompt;
+        if (continueHint) continueHint.gameObject.SetActive(false);
+
+        // Esperar SÍ/NO (solo teclado)
+        yield return WaitForYesNo(yesKey, noKey);
+
+        // Cerrar diálogo
+        HideImmediate();
+        IsRunning = false;
+    }
+
+    private IEnumerator ShowLinesInternal(string[] lines)
+    {
+        if (lines == null) lines = System.Array.Empty<string>();
+
+        // Cancela cualquier flujo previo y bloquea input inicial
+        CancelDialogue();
+        float now = useUnscaledTime ? Time.unscaledTime : Time.time;
+        unblockTime = now + Mathf.Max(0f, inputBlockSecondsOnStart);
 
         ShowImmediate();
-        running = true;
+        IsRunning = true;
 
         for (int i = 0; i < lines.Length; i++)
         {
             yield return TypeLine(lines[i]);
 
-            // Mostrar hint “click para continuar”
             if (continueHint) continueHint.gameObject.SetActive(true);
-
-            // Esperar click izquierdo o tecla (Space/Enter/E) para avanzar
             yield return WaitForAdvance();
-
             if (continueHint) continueHint.gameObject.SetActive(false);
         }
-
-        running = false;
-        HideImmediate();
     }
 
     private IEnumerator TypeLine(string line)
     {
-        if (dialogText == null)
-            yield break;
+        if (dialogText == null) yield break;
 
         dialogText.text = "";
+        skippingType = false;
+
         float delay = charsPerSecond > 0 ? 1f / charsPerSecond : 0f;
 
-        foreach (char c in line)
+        for (int i = 0; i < line.Length; i++)
         {
-            dialogText.text += c;
+            if (skippingType)
+            {
+                dialogText.text = line;
+                break;
+            }
+
+            dialogText.text += line[i];
 
             if (delay > 0)
             {
@@ -88,22 +144,58 @@ public class DialogueUI : MonoBehaviour
                 yield return null;
             }
 
-            // Si el usuario hace click, escribir todo de golpe
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
-            {
-                dialogText.text = line;
-                break;
-            }
+            if (IsAdvanceInputPressed())
+                skippingType = true;
         }
     }
 
     private IEnumerator WaitForAdvance()
     {
+        yield return null; // 1 frame por robustez
+
         while (true)
         {
-            if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.E))
+            if (IsAdvanceInputPressed())
+            {
+                yield return null; // evitar doble consumo
                 yield break;
+            }
+            yield return null;
+        }
+    }
 
+    private bool IsAdvanceInputPressed()
+    {
+        float now = useUnscaledTime ? Time.unscaledTime : Time.time;
+        if (now < unblockTime) return false;
+
+        foreach (var k in advanceKeys)
+        {
+            if (Input.GetKeyDown(k)) return true;
+        }
+        return false;
+    }
+
+    private IEnumerator WaitForYesNo(KeyCode yesKey, KeyCode noKey)
+    {
+        ConfirmResult = false;
+
+        yield return null; // 1 frame
+
+        while (true)
+        {
+            if (Input.GetKeyDown(yesKey))
+            {
+                ConfirmResult = true;
+                yield return null;
+                yield break;
+            }
+            if (Input.GetKeyDown(noKey))
+            {
+                ConfirmResult = false;
+                yield return null;
+                yield break;
+            }
             yield return null;
         }
     }

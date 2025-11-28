@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46ba1e48987ef124e99c9fffa7b58c45, type: 3}
-  m_Name: "Mu\xF1eca"
+  m_Name: Muneca
   m_EditorClassIdentifier: Assembly-CSharp::PlushData
-  plushName: Peluche (3)
+  plushName: Muneca
   dialogLines:
   - Ay...
   - Hasta a mi me da miedo.
