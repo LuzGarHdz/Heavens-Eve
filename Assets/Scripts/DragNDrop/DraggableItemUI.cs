@@ -10,7 +10,8 @@ public class DraggableItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public string itemId = "pieza";
 
     [Header("UI")]
-    public Canvas canvas; // Canvas raíz del HUD
+    public Canvas canvas;                // Canvas raíz del HUD
+    public RectTransform dragLayer;      // Capa superior (hijo del Canvas) para arrastrar por encima de todo
 
     [HideInInspector] public Transform originalParent;
     [HideInInspector] public Vector2 originalAnchoredPos;
@@ -34,8 +35,16 @@ public class DraggableItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         originalParent = rect.parent;
         originalAnchoredPos = rect.anchoredPosition;
+
+        // Elevar al dragLayer si está asignado, si no, al Canvas root
+        if (dragLayer != null)
+            rect.SetParent(dragLayer, worldPositionStays: false);
+        else
+            rect.SetParent(canvas.transform, worldPositionStays: false);
+
         group.blocksRaycasts = false; // para que DropZone reciba el drop
-        group.alpha = 0.9f;
+        group.alpha = 0.95f;
+
         Debug.Log($"[DraggableItemUI] BeginDrag '{itemId}' pos={originalAnchoredPos}");
     }
 
@@ -50,11 +59,13 @@ public class DraggableItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         group.blocksRaycasts = true;
         group.alpha = 1f;
 
-        // Si no lo recogió un DropZone que lo reparentó, vuelve al origen
-        if (rect.parent == originalParent)
+        // Si no lo recogió un DropZone (reparent), vuelve al origen
+        if (rect.parent == originalParent || rect.parent == canvas.transform || (dragLayer != null && rect.parent == dragLayer))
         {
+            rect.SetParent(originalParent, worldPositionStays: false);
             rect.anchoredPosition = originalAnchoredPos;
         }
+
         Debug.Log($"[DraggableItemUI] EndDrag '{itemId}' parent={(rect.parent ? rect.parent.name : "null")}");
     }
 }

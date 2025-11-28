@@ -10,11 +10,13 @@ public class DragAndDropMinigame : MonoBehaviour
 
     [Header("UI")]
     public Canvas canvas;
-    public RectTransform itemsContainer;   // contenedor donde están los DraggableItemUI
-    public Transform placedContainer;      // donde reubicamos los ítems ya colocados
-    public DropZoneUI dropZone;            // zona de “reparación”
-    public Image stateImage;               // imagen que muestra la bicicleta en sus estados
-    public Sprite[] stateSprites;          // 0=rota ... N=arreglada
+    public RectTransform itemsContainer;
+    public Transform placedContainer;
+    public DropZoneUI dropZone;
+    public Image stateImage;
+    public Sprite[] stateSprites;
+    public Image newImage;
+
 
     [Header("Timer")]
     public bool useTimer = true;
@@ -22,7 +24,7 @@ public class DragAndDropMinigame : MonoBehaviour
     public TMP_Text timerText;
 
     [Header("Mensajes")]
-    public TMP_Text progressText;          // opcional: “X/Y piezas”
+    public TMP_Text progressText;
     public string progressFormat = "{0}/{1}";
 
     private HashSet<string> placed = new HashSet<string>();
@@ -46,6 +48,19 @@ public class DragAndDropMinigame : MonoBehaviour
                 if (d != null)
                 {
                     d.canvas = canvas;
+                    // Crear capa superior para arrastre
+                    var dl = canvas.transform.Find("DragLayer") as RectTransform;
+                    if (dl == null)
+                    {
+                        var go = new GameObject("DragLayer", typeof(RectTransform));
+                        dl = go.GetComponent<RectTransform>();
+                        dl.SetParent(canvas.transform, false);
+                        dl.anchorMin = Vector2.zero;
+                        dl.anchorMax = Vector2.one;
+                        dl.offsetMin = Vector2.zero;
+                        dl.offsetMax = Vector2.zero;
+                    }
+                    d.dragLayer = dl;
                     items.Add(d);
                 }
             }
@@ -53,9 +68,8 @@ public class DragAndDropMinigame : MonoBehaviour
         Debug.Log($"[DragAndDropMinigame] Awake. items={items.Count} required={requiredItemIds.Count} dropZone={(dropZone ? dropZone.name : "null")} canvas={(canvas ? canvas.name : "null")}");
     }
 
-    public void StartMinigame()
+    public void StartMiniggameValidation()
     {
-        // Validar requiredItemIds contra los DraggableItemUI presentes
         var availableIds = new HashSet<string>();
         foreach (var d in items)
         {
@@ -68,9 +82,13 @@ public class DragAndDropMinigame : MonoBehaviour
                 Debug.LogWarning($"[DragAndDropMinigame] Required itemId '{req}' no existe en itemsContainer.");
         }
 
-        // Validar sprites de estado
         if (stateImage != null && (stateSprites == null || stateSprites.Length == 0))
             Debug.LogWarning("[DragAndDropMinigame] stateSprites vacío; no se actualizará imagen de estado.");
+    }
+
+    public void StartMinigame()
+    {
+        StartMiniggameValidation();
 
         placed.Clear();
         timeLeft = timeLimitSeconds;
@@ -78,13 +96,13 @@ public class DragAndDropMinigame : MonoBehaviour
 
         Debug.Log($"[DragAndDropMinigame] Start. timeLimit={timeLimitSeconds}s useTimer={useTimer}");
 
-        // Reset de ítems a su contenedor original (si quieres anclar posiciones iniciales, ya se guardan en DraggableItemUI al comenzar drag)
         foreach (var d in items)
         {
             if (d == null) continue;
             var rt = d.GetComponent<RectTransform>();
             rt.SetParent(itemsContainer, worldPositionStays: false);
-            // No cambiamos anchoredPosition para respetar el layout
+            // respetar layout
+            d.gameObject.SetActive(true); // asegurar visibles al iniciar
         }
 
         UpdateStateSprite();
@@ -96,7 +114,7 @@ public class DragAndDropMinigame : MonoBehaviour
     {
         if (!running || !useTimer) return;
 
-        float dt = Time.unscaledDeltaTime; // independiente de pausa
+        float dt = Time.unscaledDeltaTime;
         timeLeft -= dt;
         if (timeLeft <= 0f)
         {
@@ -136,23 +154,24 @@ public class DragAndDropMinigame : MonoBehaviour
             return;
         }
 
-        // Aceptado
+        // Aceptado: marcar colocado y ocultar el objeto
         placed.Add(item.itemId);
-        var rt = item.GetComponent<RectTransform>();
-        rt.SetParent(placedContainer != null ? placedContainer : zone.transform, worldPositionStays: false);
-        rt.anchoredPosition = Vector2.zero;
+
+        // Si quieres mostrar un placeholder en placedContainer, crea un Empty con imagen/sprite por ítem aquí.
+        // Por ahora, simplemente desactivamos el item para que desaparezca:
+        item.gameObject.SetActive(false);
 
         Debug.Log($"[DragAndDropMinigame] Colocado '{item.itemId}'. Progreso: {placed.Count}/{requiredItemIds.Count}");
 
         UpdateStateSprite();
         UpdateProgressUI();
 
-        // ¿Completado?
         if (placed.Count >= requiredItemIds.Count)
         {
             running = false;
             Debug.Log("[DragAndDropMinigame] Todos los items colocados. Completed.");
             OnCompleted?.Invoke();
+
         }
     }
 

@@ -10,8 +10,16 @@ public class DropZoneUI : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPo
 
     public void OnDrop(PointerEventData eventData)
     {
-        if (controller == null) return;
-        var drag = eventData.pointerDrag ? eventData.pointerDrag.GetComponent<DraggableItemUI>() : null;
+        var go = eventData.pointerDrag;
+        var drag = go ? go.GetComponent<DraggableItemUI>() : null;
+        Debug.Log($"[DropZoneUI] OnDrop. dragGO={(go ? go.name : "null")} hasDraggable={(drag != null)} zone={name}");
+
+        if (controller == null)
+        {
+            Debug.LogError("[DropZoneUI] controller is null; cannot place.");
+            return;
+        }
+
         if (drag != null)
         {
             controller.TryPlace(drag, this);
