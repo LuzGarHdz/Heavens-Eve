@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TocadiscosMission : MonoBehaviour
 {
@@ -13,22 +12,20 @@ public class TocadiscosMission : MonoBehaviour
     public Animator tocadiscosAnimator; // parámetro bool "isSpinning"
     public float spinDuration = 5f;
 
-    [Header("Mantas")]
-    public GameObject mantaA;
-    public GameObject mantaB;
-
     public void TryActivate()
     {
+        if (flags == null) { Debug.LogError("[TocadiscosMission] flags es NULL."); return; }
+
         if (!flags.AllCoreCompleted())
         {
             InteractionManager.Instance?.ShowMessage("Completa las otras misiones primero.");
+            Debug.Log($"[TocadiscosMission] Gate bloqueado. bosque={flags.bosqueCompleted} cuarto={flags.cuartoCompleted} bici={flags.sotanoBikeCompleted}");
             return;
         }
 
-        // Debe tener el disco en inventario
         if (InventoryManager.Instance == null)
         {
-            Debug.LogWarning("[TocadiscosMission] InventoryManager.Instance es null.");
+            Debug.LogError("[TocadiscosMission] InventoryManager.Instance es null.");
             return;
         }
 
@@ -36,13 +33,10 @@ public class TocadiscosMission : MonoBehaviour
         if (!removed)
         {
             InteractionManager.Instance?.ShowMessage("Necesitas el disco para usar el tocadiscos.");
+            Debug.Log("[TocadiscosMission] Disco no encontrado en inventario.");
             return;
         }
 
-        mantaA.SetActive(false);
-        mantaB.SetActive(true);
-
-        // Animar tocadiscos
         if (tocadiscosAnimator != null)
         {
             tocadiscosAnimator.SetBool("isSpinning", true);
@@ -50,14 +44,13 @@ public class TocadiscosMission : MonoBehaviour
         }
 
         flags.tocadiscosCompleted = true;
+        Debug.Log("[TocadiscosMission] tocadiscosCompleted = TRUE");
         InteractionManager.Instance?.ShowInteraction("- Tocadiscos activado");
     }
 
     private void StopSpinning()
     {
         if (tocadiscosAnimator != null)
-        {
             tocadiscosAnimator.SetBool("isSpinning", false);
-        }
     }
 }

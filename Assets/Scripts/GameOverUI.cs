@@ -7,6 +7,10 @@ public class GameOverUI : MonoBehaviour
     [Header("Panel")]
     public GameObject panel;
 
+    [Header("Escena")]
+    public SceneManager scene;
+
+
     [Header("Fade (opcional)")]
     public CanvasGroup canvasGroup;     // Asigna si quieres fade. Si es null, se muestra inmediato.
     public float fadeDuration = 0.35f;
@@ -78,19 +82,12 @@ public class GameOverUI : MonoBehaviour
     // Botones UI
     public void OnRestart()
     {
-        // Si tienes GameManager con lógica de restart, úsala
-        if (GameManager.Instance != null)
-        {
-            SafeUnpause();
-            GameManager.Instance.RestartLevel();
-        }
-        else
-        {
-            // Fallback: recargar escena actual
+
             SafeUnpause();
             var scene = SceneManager.GetActiveScene();
+            SceneManager.UnloadSceneAsync(scene.name);
             SceneManager.LoadScene(scene.name);
-        }
+
     }
 
     public void OnMainMenu()

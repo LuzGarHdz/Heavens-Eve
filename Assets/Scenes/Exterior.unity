@@ -5306,74 +5306,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &443173414
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 443173417}
-  - component: {fileID: 443173415}
-  - component: {fileID: 443173416}
-  m_Layer: 0
-  m_Name: InventoryManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &443173415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443173414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a72cba835a69de4f9fdea88cd790792, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryManager
-  inventoryPanel: {fileID: 1542105387}
-  slotImages:
-  - {fileID: 517014422}
-  - {fileID: 960290554}
-  - {fileID: 1096415879}
-  - {fileID: 1856805828}
-  detailImage: {fileID: 1268843169}
-  detailNameText: {fileID: 1158432988}
-  detailDescriptionText: {fileID: 1221990758}
-  toggleKey: 105
-  pauseOnOpen: 1
---- !u!114 &443173416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443173414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6b3499b4cec2504ba2374a5897084e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BagOpener
---- !u!4 &443173417
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 443173414}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.76856, y: -37.48069, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &517014421
 GameObject:
   m_ObjectHideFlags: 0
@@ -5467,7 +5399,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 443173415}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
         m_MethodName: OnSlotClicked
         m_Mode: 3
@@ -6054,7 +5986,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 443173415}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
         m_MethodName: OnSlotClicked
         m_Mode: 3
@@ -6186,7 +6118,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 443173415}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
         m_MethodName: OnSlotClicked
         m_Mode: 3
@@ -6944,7 +6876,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 443173416}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BagOpener, Assembly-CSharp
         m_MethodName: OnBagClicked
         m_Mode: 1
@@ -7433,7 +7365,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 443173415}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InventoryManager, Assembly-CSharp
         m_MethodName: OnSlotClicked
         m_Mode: 3
@@ -7997,7 +7929,6 @@ SceneRoots:
   - {fileID: 1950827653}
   - {fileID: 24250510}
   - {fileID: 267529478}
-  - {fileID: 443173417}
   - {fileID: 1403382297}
   - {fileID: 1542105392}
   - {fileID: 726200809}

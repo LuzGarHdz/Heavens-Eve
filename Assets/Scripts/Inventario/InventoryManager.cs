@@ -25,7 +25,22 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
+        // Persistencia singleton
+        if (Instance != null && Instance != this)
+        {
+            // Ya existe un inventario persistente: destruir este duplicado
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        // Inicialización UI
+        if (slotImages == null || slotImages.Length == 0)
+        {
+            Debug.LogWarning("[InventoryManager] No hay slotImages asignados (deben ser 4).");
+        }
+
         slotData = new GiftData[slotImages.Length];
 
         // Inicialmente limpiar slots
@@ -101,7 +116,7 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("Inventario lleno (4/4).");
     }
 
-    // NUEVO: eliminar un regalo por referencia de GiftData
+    // Eliminar por referencia
     public bool RemoveGift(GiftData gift)
     {
         if (gift == null) return false;
@@ -126,11 +141,11 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        Debug.Log($"[InventoryManager] RemoveGift: {gift.giftName} no encontrado en inventario.");
+        Debug.Log($"[InventoryManager] RemoveGift: {gift?.giftName} no encontrado en inventario.");
         return false;
     }
 
-    // NUEVO: eliminar un regalo por nombre (case-sensitive)
+    // Eliminar por nombre exacto
     public bool RemoveGiftByName(string giftName)
     {
         if (string.IsNullOrEmpty(giftName)) return false;
@@ -147,7 +162,6 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
 
-    // Llamado por los botones de cada slot
     public void OnSlotClicked(int index)
     {
         if (index < 0 || index >= slotData.Length) return;

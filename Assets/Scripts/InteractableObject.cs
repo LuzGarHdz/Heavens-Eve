@@ -10,7 +10,8 @@ public class InteractableObject : MonoBehaviour
     [Header("Missions")]
     public BicycleRepairMission bicycleMission; // Asigna para el caso "Bicicleta"
     public TocadiscosMission tocadiscosMission;
-// Asigna para el caso "Tocadiscos"
+    // Asigna para el caso "Tocadiscos"
+    public SimpleDialogue simpleDialogue;
 
     [Header("Estado")]
     public bool isDisabled = false;     // si está deshabilitado, no muestra prompt ni interactúa
@@ -23,6 +24,12 @@ public class InteractableObject : MonoBehaviour
         {
             Debug.Log("[InteractableObject] Object is disabled. Ignoring.");
             return;
+        }
+
+        if (simpleDialogue != null && simpleDialogue.triggerMode == SimpleDialogue.TriggerMode.OnInteract)
+        {
+            simpleDialogue.Play();
+
         }
 
         // Misión Gate (opcional en este objeto)
@@ -85,8 +92,15 @@ public class InteractableObject : MonoBehaviour
             {
                 InventoryManager.Instance.AddGift(giftData);
             }
+            // Notificar al manager del bosque si existe en escena
+            var bosqueManager = FindObjectOfType<MisionBosqueManager>();
+            if (bosqueManager != null)
+            {
+                bosqueManager.OnGiftFound();
+            }
             GameManager.Instance?.OnRegaloRecolectado();
             gameObject.SetActive(false);
+            return;
         }
         else if (objectName == "NPC")
         {

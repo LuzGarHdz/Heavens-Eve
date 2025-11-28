@@ -81,18 +81,19 @@ public class BicycleRepairMission : MonoBehaviour
     private void OnMinigameCompleted()
     {
         completed = true;
-        if (flags != null) flags.sotanoBikeCompleted = true;
-
+        if (flags != null)
+        {
+            flags.sotanoBikeCompleted = true;
+            Debug.Log("[BicycleRepairMission] sotanoBikeCompleted = TRUE");
+        }
         Close();
         UpdateBikeSprite();
-
-        // Remover el casco del inventario
+        // remover casco del inventario
         if (InventoryManager.Instance != null)
         {
             bool removed = InventoryManager.Instance.RemoveGiftByName(cascoGiftName);
             Debug.Log($"[BicycleRepairMission] Remove '{cascoGiftName}' del inventario: {removed}");
         }
-
         StartCoroutine(ShowResultDialogue(successLines));
     }
 

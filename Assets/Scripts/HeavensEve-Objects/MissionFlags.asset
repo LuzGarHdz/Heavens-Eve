@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ed12c75c2b9044e8d528f784244866, type: 3}
   m_Name: MissionFlags
   m_EditorClassIdentifier: Assembly-CSharp::MissionFlagsSO
-  bosqueCompleted: 1
-  cuartoCompleted: 1
+  bosqueCompleted: 0
+  cuartoCompleted: 0
   sotanoBikeCompleted: 0
-  fotoCompleted: 0
-  sotanoFinalCompleted: 0
+  tocadiscosCompleted: 0
