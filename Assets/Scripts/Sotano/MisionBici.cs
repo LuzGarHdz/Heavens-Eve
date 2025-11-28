@@ -85,6 +85,9 @@ public class BicycleRepairMission : MonoBehaviour
         {
             flags.sotanoBikeCompleted = true;
             Debug.Log("[BicycleRepairMission] sotanoBikeCompleted = TRUE");
+            var tocadiscos = FindObjectOfType<TocadiscosMission>();
+            if (tocadiscos != null) tocadiscos.OnCoreMissionsStateChanged();
+
         }
         Close();
         UpdateBikeSprite();

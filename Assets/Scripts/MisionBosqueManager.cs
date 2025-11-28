@@ -38,6 +38,8 @@ public class MisionBosqueManager : MonoBehaviour
             }
 
             InteractionManager.Instance?.ShowInteraction(missionCompletedText);
+            var tocadiscos = FindObjectOfType<TocadiscosMission>();
+            if (tocadiscos != null) tocadiscos.OnCoreMissionsStateChanged();
         }
     }
 }

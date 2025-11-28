@@ -64,12 +64,17 @@ public class InteractableObject : MonoBehaviour
         if (objectName == "Tocadiscos")
         {
             Debug.Log("[InteractableObject] Tocadiscos Interact");
-            if (tocadiscosMission != null) tocadiscosMission.TryActivate();
-            else Debug.LogWarning("[InteractableObject] tocadiscosMission no asignado.");
+            var tm = tocadiscosMission != null ? tocadiscosMission : GetComponent<TocadiscosMission>();
+            if (tm != null)
+            {
+                tm.TryActivate();
+            }
+            else
+            {
+                Debug.LogWarning("[InteractableObject] TocadiscosMission no asignado ni encontrado en el GO.");
+            }
             return;
         }
-
-        // Resto de tus casos existentes...
         bool gmStarted = GameManager.Instance?.missionStarted ?? false;
         Debug.Log($"[InteractableObject] GameManager missionStarted={gmStarted}");
 
@@ -108,5 +113,7 @@ public class InteractableObject : MonoBehaviour
             InteractionManager.Instance?.ShowInteraction("- Encontrar los 3 regalos");
             InteractionManager.Instance?.NotifyTalkedToNPC();
         }
+
+
     }
 }

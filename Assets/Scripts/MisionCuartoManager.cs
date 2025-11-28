@@ -78,5 +78,7 @@ public class MisionCuartoManager : MonoBehaviour
         }
 
         InteractionManager.Instance?.ShowInteraction(missionCompletedText);
+        var tocadiscos = FindObjectOfType<TocadiscosMission>();
+        if (tocadiscos != null) tocadiscos.OnCoreMissionsStateChanged();
     }
 }

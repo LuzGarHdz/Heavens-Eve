@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Regalo1
   m_EditorClassIdentifier: Assembly-CSharp::GiftData
   giftName: Casco
-  description: "Un peque\xF1o casco rosa, "
+  description: "Hace tiempo mi hija me dijo que quer\xEDa aprender a andar en bicicleta,
+    pens\xE9 en comprarle una nueva, pero mi esposa me sugiri\xF3 checar en el \xE1tico
+    por algo m\xE1s personalizado."
   iconSprite: {fileID: -3355443893570369289, guid: 1644929cf7c289f48aafea1b35fe91b7, type: 3}
   detailSprite: {fileID: -1147901922913264264, guid: c1ff102d9213f8648b94e3d414d4a1e3, type: 3}

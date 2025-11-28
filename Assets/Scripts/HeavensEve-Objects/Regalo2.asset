@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Regalo2
   m_EditorClassIdentifier: Assembly-CSharp::GiftData
   giftName: Disco
-  description: Un disco de vinil
+  description: "Todav\xEDa recuerdo cuando despert\xE1bamos cantando, poniendo m\xFAsica
+    en el tocadiscos. Tiene a\xF1os que no lo veo, pensaba reanimar esa costumbre
+    con un disco que le grabe."
   iconSprite: {fileID: -7094396837880488916, guid: a3111a1cb99d566489d6bede8c710e8e, type: 3}
   detailSprite: {fileID: -4195959552909295376, guid: 97e2258e8edb6d445a502a3c1cd2c2d3, type: 3}
