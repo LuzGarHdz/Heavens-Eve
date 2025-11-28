@@ -3,14 +3,29 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     public string objectName = "Regalo";
-    public GiftData giftData; // Asigna un GiftData si es un regalo
+    public GiftData giftData; // (sigue para inventario, si lo usas en otras escenas)
+    public ClosetUI closetUI; // Asigna si este objeto es el closet
 
     public void Interact()
     {
-        // Respetar tu lógica de misión previa
+        // Si estás usando restricciones por misión, adáptalo según tu escena:
+        if (objectName == "Closet")
+        {
+            if (closetUI != null)
+            {
+                closetUI.OpenCloset();
+            }
+            else
+            {
+                Debug.LogWarning("InteractableObject: closetUI no asignado en el closet.");
+            }
+            return;
+        }
+
+        // Resto de tus casos existentes...
         if (!GameManager.Instance.missionStarted && objectName != "NPC")
         {
-            InteractionManager.Instance.ShowMessage("");
+            InteractionManager.Instance.ShowMessage("Habla con el NPC primero [E]");
             return;
         }
 
@@ -20,7 +35,6 @@ public class InteractableObject : MonoBehaviour
             {
                 InventoryManager.Instance.AddGift(giftData);
             }
-
             GameManager.Instance.OnRegaloRecolectado();
             gameObject.SetActive(false);
         }

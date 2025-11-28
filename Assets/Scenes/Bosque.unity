@@ -4799,7 +4799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1007da890bff0e4588f702d0da7a4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PasarNivelPorPosicion
-  nombreSiguienteNivel: Casa
+  nombreSiguienteNivel: Exterior
   limiteX: 370
   transitionAnim: {fileID: 2029900193}
 --- !u!4 &1744958955

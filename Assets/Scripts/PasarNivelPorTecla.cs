@@ -3,58 +3,75 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-/// <summary>
-/// Permite pasar al siguiente nivel presionando una tecla (Q) cuando el jugador
-/// está dentro de una zona (collider con isTrigger) y opcionalmente cuando la misión se haya completado.
-/// Muestra un texto del estilo: "[Q] para ir a Casa".
-/// Estilo basado en PasarNivelPorPosicion.
-/// </summary>
+/// Permite cambiar de escena presionando una tecla (Q) cuando el jugador
+/// entra en una zona trigger. Muestra un mensaje tipo: "[Q] para ir a Casa".
+/// Ademï¿½s, puedes definir en el inspector las coordenadas de spawn del jugador
+/// en la escena destino SIN crear mï¿½s scripts.
+///
+/// Uso:
+/// - Aï¿½ade este script a un GameObject con un Collider2D marcado como isTrigger.
+/// - Asigna el nombre de la escena destino en 'nombreSiguienteNivel'.
+/// - (Opcional) Activa 'usarSpawnCoordenadas' y define 'spawnDestino'.
+/// - (Opcional) Asigna un TMP_Text para el mensaje. Si lo dejas vacï¿½o y tienes InteractionManager, lo usarï¿½.
+/// - (Opcional) Si 'requiereMisionCompletada' estï¿½ en true, solo permitirï¿½ el cambio cuando la misiï¿½n estï¿½ completa.
 public class PasarNivelPorTecla : MonoBehaviour
 {
-    [Header("Configuración de nivel")]
+    [Header("Configuraciï¿½n de nivel")]
     [SerializeField] private string nombreSiguienteNivel = "Casa";
     [SerializeField] private bool requiereMisionCompletada = true;
 
+    [Header("Spawn destino (opcional)")]
+    [SerializeField] private bool usarSpawnCoordenadas = false;
+    [SerializeField] private Vector2 spawnDestino = Vector2.zero;
+
     [Header("Interfaz")]
     [SerializeField] private string mensajeBase = "[Q] para ir a ";
-    [SerializeField] private TMP_Text textoUI; // Texto en pantalla
+    [SerializeField] private TMP_Text textoUI; // opcional. Si es null, intentarï¿½ usar InteractionManager
     [SerializeField] private bool ocultarTextoAlSalir = true;
 
-    [Header("Transición")]
+    [Header("Transiciï¿½n")]
     [SerializeField] private Animator transitionAnim;
-    [SerializeField] private float delayTransicion = 1f;
+    [SerializeField] private float delayTransicion = 1f; // segundos
 
     [Header("Input")]
     [SerializeField] private KeyCode teclaCambio = KeyCode.Q;
 
-    private Transform jugador;
     private bool jugadorDentro = false;
     private bool cargando = false;
 
+    // Variables estï¿½ticas para pasar el spawn sin crear mï¿½s scripts
+    private static bool s_tieneSpawnPendiente = false;
+    private static Vector2 s_spawnPendiente;
+    private static string s_escenaObjetivo = null;
+    private static bool s_escuchandoSceneLoaded = false;
+
+    private void OnEnable()
+    {
+        AsegurarEscuchaSceneLoaded();
+    }
+
     private void Start()
     {
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        if (playerObj != null)
-            jugador = playerObj.transform;
-        else
-            Debug.LogError("No se encontró un objeto con el tag 'Player'");
-
-        // Si el texto existe, lo ocultamos al inicio
-        if (textoUI != null)
-            textoUI.gameObject.SetActive(false);
+        if (textoUI != null) textoUI.gameObject.SetActive(false);
     }
 
     private void Update()
     {
         if (!jugadorDentro || cargando) return;
 
-        // Validar condición de misión si corresponde
         if (requiereMisionCompletada && GameManager.Instance != null && !GameManager.Instance.missionCompleted)
             return;
 
-        // Escuchar la tecla
         if (Input.GetKeyDown(teclaCambio))
         {
+            // Guardar spawn para la escena destino si aplica
+            if (usarSpawnCoordenadas)
+            {
+                s_tieneSpawnPendiente = true;
+                s_spawnPendiente = spawnDestino;
+                s_escenaObjetivo = nombreSiguienteNivel;
+            }
+
             StartCoroutine(CargarNivel());
         }
     }
@@ -66,7 +83,8 @@ public class PasarNivelPorTecla : MonoBehaviour
         if (transitionAnim != null)
             transitionAnim.SetTrigger("End");
 
-        yield return new WaitForSeconds(delayTransicion);
+        // Usar tiempo real para no depender de Time.timeScale (por si el juego estï¿½ en pausa)
+        yield return new WaitForSecondsRealtime(delayTransicion);
 
         SceneManager.LoadScene(nombreSiguienteNivel);
 
@@ -74,49 +92,38 @@ public class PasarNivelPorTecla : MonoBehaviour
             transitionAnim.SetTrigger("Start");
     }
 
-    // Detecta entrada del jugador en la zona trigger
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (!collision.CompareTag("Player")) return;
-
+        if (!col.CompareTag("Player")) return;
         jugadorDentro = true;
-
-        // Mostrar mensaje si se cumple (o todavía no, pero anunciamos)
         MostrarMensaje();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D col)
     {
-        if (!collision.CompareTag("Player")) return;
-
+        if (!col.CompareTag("Player")) return;
         jugadorDentro = false;
-
-        if (ocultarTextoAlSalir)
-            OcultarMensaje();
+        if (ocultarTextoAlSalir) OcultarMensaje();
     }
 
     private void MostrarMensaje()
     {
-        string textoFinal = mensajeBase + nombreSiguienteNivel;
-
-        // Si requiere misión y aún no está completada, podrías mostrar otro mensaje
+        string txt = mensajeBase + nombreSiguienteNivel;
         if (requiereMisionCompletada && GameManager.Instance != null && !GameManager.Instance.missionCompleted)
-        {
-            textoFinal = "Primero completa la misión.";
-        }
+            txt = "Primero completa la misiï¿½n.";
 
         if (textoUI != null)
         {
-            textoUI.text = textoFinal;
+            textoUI.text = txt;
             textoUI.gameObject.SetActive(true);
         }
         else if (InteractionManager.Instance != null)
         {
-            InteractionManager.Instance.ShowMessage(textoFinal);
+            InteractionManager.Instance.ShowMessage(txt);
         }
         else
         {
-            Debug.Log($"[PasarNivelPorTecla] {textoFinal}");
+            Debug.Log($"[PasarNivelPorTecla] {txt}");
         }
     }
 
@@ -127,4 +134,56 @@ public class PasarNivelPorTecla : MonoBehaviour
         else if (InteractionManager.Instance != null)
             InteractionManager.Instance.HideMessage();
     }
+
+    // --------------------- Manejo de spawn estï¿½tico ---------------------
+
+    private static void AsegurarEscuchaSceneLoaded()
+    {
+        if (!s_escuchandoSceneLoaded)
+        {
+            SceneManager.sceneLoaded += OnSceneLoadedEstatico;
+            s_escuchandoSceneLoaded = true;
+        }
+    }
+
+    private static void OnSceneLoadedEstatico(Scene scene, LoadSceneMode mode)
+    {
+        if (!s_tieneSpawnPendiente) return;
+        if (!string.IsNullOrEmpty(s_escenaObjetivo) && scene.name != s_escenaObjetivo) return;
+
+        // Buscar al jugador y reposicionarlo
+        var playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            var rb2d = playerObj.GetComponent<Rigidbody2D>();
+            if (rb2d != null)
+            {
+                rb2d.position = s_spawnPendiente;
+                rb2d.linearVelocity = Vector2.zero;
+            }
+            else
+            {
+                playerObj.transform.position = s_spawnPendiente;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[PasarNivelPorTecla] No se encontrï¿½ 'Player' en la escena destino para aplicar el spawn.");
+        }
+
+        // Limpiar flags
+        s_tieneSpawnPendiente = false;
+        s_escenaObjetivo = null;
+    }
+
+#if UNITY_EDITOR
+    // Dibuja una marca en la escena para visualizar el spawnDestino
+    private void OnDrawGizmosSelected()
+    {
+        if (!usarSpawnCoordenadas) return;
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(spawnDestino, 0.2f);
+        UnityEditor.Handles.Label(spawnDestino + Vector2.up * 0.3f, $"Spawn destino: {spawnDestino}");
+    }
+#endif
 }

@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PasarNivelPorPosicion
   nombreSiguienteNivel: Sotano
-  limiteX: 100
+  limiteX: 140
   transitionAnim: {fileID: 2019004703}
 --- !u!4 &726200809
 Transform:
@@ -1030,7 +1030,7 @@ Transform:
   m_GameObject: {fileID: 1328393083}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -125.8, y: -19, z: 0}
+  m_LocalPosition: {x: -124.6, y: -19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1488,7 +1488,7 @@ Transform:
   m_GameObject: {fileID: 1621139546}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -98.5, y: -11.9, z: 0}
+  m_LocalPosition: {x: -98.75, y: -12, z: 0}
   m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1793,6 +1793,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PasarNivelPorTecla
   nombreSiguienteNivel: Cuarto
   requiereMisionCompletada: 0
+  usarSpawnCoordenadas: 0
+  spawnDestino: {x: 0, y: 0}
   mensajeBase: '[Q] para ir al '
   textoUI: {fileID: 1527752587}
   ocultarTextoAlSalir: 1

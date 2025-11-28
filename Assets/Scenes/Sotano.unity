@@ -820,6 +820,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PasarNivelPorTecla
   nombreSiguienteNivel: Sala
   requiereMisionCompletada: 0
+  usarSpawnCoordenadas: 1
+  spawnDestino: {x: 125, y: -19}
   mensajeBase: '[Q] para regresar a la '
   textoUI: {fileID: 1511382218}
   ocultarTextoAlSalir: 1
