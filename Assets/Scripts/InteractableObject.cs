@@ -3,36 +3,31 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     public string objectName = "Regalo";
+    public GiftData giftData; // Asigna un GiftData si es un regalo
 
     public void Interact()
     {
-        // Si la misión no ha empezado, sólo permitir hablar con NPC
-        if (!GameManager.Instance.missionStarted)
+        // Respetar tu lógica de misión previa
+        if (!GameManager.Instance.missionStarted && objectName != "NPC")
         {
-            if (objectName == "NPC")
-            {
-                Debug.Log("Hablando con " + objectName);
-                InteractionManager.Instance.ShowInteraction("- Encontrar los 3 regalos");
-                InteractionManager.Instance.NotifyTalkedToNPC();
-            }
-            else
-            {
-                // Bloquear interacción con regalos antes de iniciar la misión
-                InteractionManager.Instance.ShowMessage("Habla con el NPC primero [E]");
-            }
+            InteractionManager.Instance.ShowMessage("");
             return;
         }
 
-        // Misión en curso: permitir recoger regalos
         if (objectName == "Regalo")
         {
-            Debug.Log("Recogiendo " + objectName);
-            gameObject.SetActive(false);
+            if (giftData != null && InventoryManager.Instance != null)
+            {
+                InventoryManager.Instance.AddGift(giftData);
+            }
+
             GameManager.Instance.OnRegaloRecolectado();
+            gameObject.SetActive(false);
         }
         else if (objectName == "NPC")
         {
-            InteractionManager.Instance.ShowInteraction("- Sigue buscando los regalos");
+            InteractionManager.Instance.ShowInteraction("- Encontrar los 3 regalos");
+            InteractionManager.Instance.NotifyTalkedToNPC();
         }
     }
 }

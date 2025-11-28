@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e62d680c5c26e774c9d738cce08023fd
+guid: a3111a1cb99d566489d6bede8c710e8e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7358116242512938591
-    second: inventario (1)_0
+      213: -7094396837880488916
+    second: regalo1-inventario_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: inventario (1)_0
+      name: regalo1-inventario_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 204
-        height: 108
+        x: 8
+        y: 3
+        width: 32
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f560403dcb74d1660800000000000000
-      internalID: 7358116242512938591
+      spriteID: c2c9a76e9a3ab8d90800000000000000
+      internalID: -7094396837880488916
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      inventario (1)_0: 7358116242512938591
+      regalo1-inventario_0: -7094396837880488916
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
