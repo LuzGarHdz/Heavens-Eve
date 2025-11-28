@@ -20,5 +20,6 @@ MonoBehaviour:
   - 'Tu nunca fuiste de esas. '
   isNegative: 1
   damageOnPick: 2
+  isCorrect: 0
   iconSprite: {fileID: 7775576166522283712, guid: 7d6f9fadbc461d342bb95af96434e320, type: 3}
   detailSprite: {fileID: 0}

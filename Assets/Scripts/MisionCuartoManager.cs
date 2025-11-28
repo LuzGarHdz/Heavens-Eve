@@ -7,7 +7,9 @@ public class MisionCuartoManager : MonoBehaviour
     public GameObject peluchePinguinoSuelo;     // El peluche de pingüino en el suelo (desactivado al inicio)
     public ClosetUI closetUI;
 
-    [Header("Misión")]
+    [Header("Interactable Closet")]
+    public InteractableObject closetInteractable;   // Asigna el InteractableObject del closet
+    public Collider2D closetTrigger;                // Opcional: el collider del closet (para desactivarlo)
     public string missionTitle = "- Acomodar los peluches correctos";
     public string missionCompletedText = "- Peluche de Pingüino entregado";
 
@@ -16,19 +18,12 @@ public class MisionCuartoManager : MonoBehaviour
         if (peluchesBuenosConjunto) peluchesBuenosConjunto.SetActive(false);
         if (peluchePinguinoSuelo) peluchePinguinoSuelo.SetActive(false);
 
-        // Mostrar misión (si deseas al entrar a la escena)
         InteractionManager.Instance?.ShowInteraction(missionTitle);
     }
 
-    public void OnClosetOpened()
-    {
-        // Si quieres cambiar algo al abrir closet, hazlo aquí
-    }
+    public void OnClosetOpened() { }
 
-    public void OnClosetClosed()
-    {
-        // Al cerrar sin completar, no pasa nada especial
-    }
+    public void OnClosetClosed() { }
 
     public void UpdateMissionProgress(int current, int total)
     {
@@ -37,17 +32,36 @@ public class MisionCuartoManager : MonoBehaviour
 
     public void OnMissionCompleted()
     {
-        // Activar elementos finales en la habitación
         if (peluchesBuenosConjunto) peluchesBuenosConjunto.SetActive(true);
         if (peluchePinguinoSuelo) peluchePinguinoSuelo.SetActive(true);
 
-        // Marcar misión completada a nivel global si quieres
+        // Deshabilitar closet y ocultar prompt
+        DisableCloset();
+
+        // Marcar misión (si hay GameManager)
         if (GameManager.Instance != null)
         {
             GameManager.Instance.missionCompleted = true;
-            // También podrías tener una bandera específica de “Cuarto completado”
         }
 
         InteractionManager.Instance?.ShowInteraction(missionCompletedText);
+    }
+
+    private void DisableCloset()
+    {
+        // 1) Marcar el interactable como deshabilitado
+        if (closetInteractable != null)
+            closetInteractable.isDisabled = true;
+
+        // 2) Desactivar su collider (opcional)
+        if (closetTrigger != null)
+            closetTrigger.enabled = false;
+
+        // 3) Opcional: cambiar tag para que PlayerInteraction ni siquiera lo considere
+        if (closetInteractable != null)
+            closetInteractable.gameObject.tag = "Untagged";
+
+        // 4) Quitar cualquier mensaje visible
+        InteractionManager.Instance?.HideMessage();
     }
 }

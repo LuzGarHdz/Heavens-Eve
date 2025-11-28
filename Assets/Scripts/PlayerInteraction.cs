@@ -5,25 +5,24 @@ public class PlayerInteraction : MonoBehaviour
     private InteractableObject currentObject; // objeto con el que puede interactuar
 
     [Header("Lock")]
-    public bool interactionsLocked = true; // Bosque: true; En Cuarto puedes desmarcarlo en el Inspector.
+    public bool interactionsLocked = true; // bloqueado hasta hablar con NPC (escena Bosque). En Cuarto puedes desmarcarlo en el Inspector.
 
-    // Objetos que SIEMPRE pueden interactuar aunque haya lock
     private static readonly string[] alwaysAllowed = { "NPC", "Closet" };
 
     void Update()
     {
         if (currentObject != null && Input.GetKeyDown(KeyCode.E))
         {
+            if (currentObject.isDisabled) return; // NUEVO: no interactuar si está deshabilitado
+
             if (IsAlwaysAllowed(currentObject.objectName))
             {
-                Debug.Log($"[PlayerInteraction] Interact con {currentObject.objectName}");
                 currentObject.Interact();
             }
             else
             {
                 if (!interactionsLocked)
                 {
-                    Debug.Log($"[PlayerInteraction] Interact (sin lock) con {currentObject.objectName}");
                     currentObject.Interact();
                 }
                 else
@@ -38,14 +37,25 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (collision.CompareTag("Interactable"))
         {
-            currentObject = collision.GetComponent<InteractableObject>();
+            var io = collision.GetComponent<InteractableObject>();
+            currentObject = io;
 
-            if (currentObject != null)
+            // NUEVO: si está deshabilitado, no mostrar nada
+            if (io != null && io.isDisabled)
             {
-                if (IsAlwaysAllowed(currentObject.objectName))
+                return;
+            }
+
+            if (io != null && io.objectName == "Closet")
+            {
+                InteractionManager.Instance.ShowMessage("[E para abrir]");
+            }
+            else
+            {
+                if (!interactionsLocked)
                     InteractionManager.Instance.ShowMessage("[E para abrir]");
                 else
-                    InteractionManager.Instance.ShowMessage(!interactionsLocked ? "[E para abrir]" : "Habla con el NPC primero [E]");
+                    InteractionManager.Instance.ShowMessage("Habla con el NPC primero [E]");
             }
         }
         else if (collision.CompareTag("NPC"))
