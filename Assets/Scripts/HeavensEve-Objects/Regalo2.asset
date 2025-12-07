@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c4d472e491d89d4aadc28e12f861450, type: 3}
+  m_Name: Regalo2
+  m_EditorClassIdentifier: Assembly-CSharp::GiftData
+  giftName: Disco
+  description: "Todav\xEDa recuerdo cuando despert\xE1bamos cantando, poniendo m\xFAsica
+    en el tocadiscos. Tiene a\xF1os que no lo veo."
+  iconSprite: {fileID: -7094396837880488916, guid: a3111a1cb99d566489d6bede8c710e8e, type: 3}
+  detailSprite: {fileID: -4195959552909295376, guid: 97e2258e8edb6d445a502a3c1cd2c2d3, type: 3}

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c4d472e491d89d4aadc28e12f861450, type: 3}
+  m_Name: Regalo3
+  m_EditorClassIdentifier: Assembly-CSharp::GiftData
+  giftName: Pinguino de Peluche
+  description: "Recuerdo bien este peluche, mi hija lo vio cuando fuimos de paseo
+    al acuario. Por fin logramos conseguirlo, pero hubo m\xE1s cosas que me faltaron
+    hacer con ella... "
+  iconSprite: {fileID: 3499880044133311783, guid: b739d46fc692b304cbcbc56cb7336ff0, type: 3}
+  detailSprite: {fileID: -1473413529395405767, guid: fb2637acaf76d5f46aa35a2f72064d62, type: 3}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c4d472e491d89d4aadc28e12f861450, type: 3}
+  m_Name: Regalo1
+  m_EditorClassIdentifier: Assembly-CSharp::GiftData
+  giftName: Casco
+  description: "Hace tiempo mi hija quer\xEDa aprender a andar en bicicleta, pens\xE9
+    en comprarle una nueva, pero mi esposa sugiri\xF3 checar en el \xE1tico."
+  iconSprite: {fileID: -3355443893570369289, guid: 1644929cf7c289f48aafea1b35fe91b7, type: 3}
+  detailSprite: {fileID: -1147901922913264264, guid: c1ff102d9213f8648b94e3d414d4a1e3, type: 3}

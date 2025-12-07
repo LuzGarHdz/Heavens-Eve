@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ba1e48987ef124e99c9fffa7b58c45, type: 3}
+  m_Name: Muneca
+  m_EditorClassIdentifier: Assembly-CSharp::PlushData
+  plushName: Muneca
+  dialogLines:
+  - Ay...
+  - Hasta a mi me da miedo.
+  - "Entiendo que tu mam\xE1 quer\xEDa que tuvieras una mu\xF1eca, pero..."
+  - 'Tu nunca fuiste de esas. '
+  isNegative: 1
+  damageOnPick: 2
+  isCorrect: 0
+  iconSprite: {fileID: 7775576166522283712, guid: 7d6f9fadbc461d342bb95af96434e320, type: 3}
+  detailSprite: {fileID: 0}

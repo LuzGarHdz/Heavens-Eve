@@ -1,0 +1,488 @@
+fileFormatVersion: 2
+guid: 4368522da5b066b4086665ce34c5f043
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8636061935272580762
+    second: HumoLoop-Sheet_0
+  - first:
+      213: -6030760210311360444
+    second: HumoLoop-Sheet_1
+  - first:
+      213: 5159316586699935908
+    second: HumoLoop-Sheet_2
+  - first:
+      213: -499609924336831901
+    second: HumoLoop-Sheet_3
+  - first:
+      213: -8254533848866762346
+    second: HumoLoop-Sheet_4
+  - first:
+      213: -6175511049654882790
+    second: HumoLoop-Sheet_5
+  - first:
+      213: -1107176968916747480
+    second: HumoLoop-Sheet_6
+  - first:
+      213: 5991373400996998083
+    second: HumoLoop-Sheet_7
+  - first:
+      213: 6245342405783517456
+    second: HumoLoop-Sheet_8
+  - first:
+      213: 1057019788083949688
+    second: HumoLoop-Sheet_9
+  - first:
+      213: 8066638104260823639
+    second: HumoLoop-Sheet_10
+  - first:
+      213: -1787432346657415287
+    second: HumoLoop-Sheet_11
+  - first:
+      213: 4831915205071768878
+    second: HumoLoop-Sheet_12
+  - first:
+      213: -1841833824949371007
+    second: HumoLoop-Sheet_13
+  - first:
+      213: -4336777910946288903
+    second: HumoLoop-Sheet_14
+  - first:
+      213: -221966536957601647
+    second: HumoLoop-Sheet_15
+  - first:
+      213: 2998574059059124272
+    second: HumoLoop-Sheet_16
+  - first:
+      213: -7914888368778845909
+    second: HumoLoop-Sheet_17
+  - first:
+      213: 8435603113161450068
+    second: HumoLoop-Sheet_18
+  - first:
+      213: -1983335031871343386
+    second: HumoLoop-Sheet_19
+  - first:
+      213: 2770619433063761698
+    second: HumoLoop-Sheet_20
+  - first:
+      213: 4922890592570492013
+    second: HumoLoop-Sheet_21
+  - first:
+      213: 9065894017682742569
+    second: HumoLoop-Sheet_22
+  - first:
+      213: 3238437897968777483
+    second: HumoLoop-Sheet_23
+  - first:
+      213: 1930411568208630540
+    second: HumoLoop-Sheet_24
+  - first:
+      213: 3565380983564959389
+    second: HumoLoop-Sheet_25
+  - first:
+      213: -3806836642378255157
+    second: HumoLoop-Sheet_26
+  - first:
+      213: -829758700861926780
+    second: HumoLoop-Sheet_27
+  - first:
+      213: -5249238700674442070
+    second: HumoLoop-Sheet_28
+  - first:
+      213: -7609326308090143565
+    second: HumoLoop-Sheet_29
+  - first:
+      213: 1651190189402058510
+    second: HumoLoop-Sheet_30
+  - first:
+      213: 2345454641069808126
+    second: HumoLoop-Sheet_31
+  - first:
+      213: 2673634193926550465
+    second: HumoLoop-Sheet_32
+  - first:
+      213: 4237916220355153222
+    second: HumoLoop-Sheet_33
+  - first:
+      213: -4188906395156179455
+    second: HumoLoop-Sheet_34
+  - first:
+      213: -1991066610610866335
+    second: HumoLoop-Sheet_35
+  - first:
+      213: 3471648115808673208
+    second: HumoLoop-Sheet_36
+  - first:
+      213: 2830295121181159347
+    second: HumoLoop-Sheet_37
+  - first:
+      213: -5490675303078528677
+    second: HumoLoop-Sheet_38
+  - first:
+      213: 910345852981273417
+    second: HumoLoop-Sheet_39
+  - first:
+      213: 8878882988174568172
+    second: HumoLoop-Sheet_40
+  - first:
+      213: -8285418791163274289
+    second: HumoLoop-Sheet_41
+  - first:
+      213: 5214128230892381515
+    second: HumoLoop-Sheet_42
+  - first:
+      213: 4124177556843367474
+    second: HumoLoop-Sheet_43
+  - first:
+      213: 3928565739791847130
+    second: HumoLoop-Sheet_44
+  - first:
+      213: -254880087878974100
+    second: HumoLoop-Sheet_45
+  - first:
+      213: 5140595118612394744
+    second: HumoLoop-Sheet_46
+  - first:
+      213: -9151744413054980138
+    second: HumoLoop-Sheet_47
+  - first:
+      213: -2314577411665325853
+    second: HumoLoop-Sheet_48
+  - first:
+      213: 8099750680346888043
+    second: HumoLoop-Sheet_49
+  - first:
+      213: -8746153275225949914
+    second: HumoLoop-Sheet_50
+  - first:
+      213: 4934665286282365345
+    second: HumoLoop-Sheet_51
+  - first:
+      213: 2060072488263908797
+    second: HumoLoop-Sheet_52
+  - first:
+      213: -5493780048087465166
+    second: HumoLoop-Sheet_53
+  - first:
+      213: 2231388471478581248
+    second: HumoLoop-Sheet_54
+  - first:
+      213: -452455714729543543
+    second: HumoLoop-Sheet_55
+  - first:
+      213: 6367491716172460357
+    second: HumoLoop-Sheet_56
+  - first:
+      213: 2018749584123018362
+    second: HumoLoop-Sheet_57
+  - first:
+      213: 8174754136971997391
+    second: HumoLoop-Sheet_58
+  - first:
+      213: 6764003792986511122
+    second: HumoLoop-Sheet_59
+  - first:
+      213: -8189195264779281423
+    second: HumoLoop-Sheet_60
+  - first:
+      213: -8051205903770706673
+    second: HumoLoop-Sheet_61
+  - first:
+      213: 4762198631185489648
+    second: HumoLoop-Sheet_62
+  - first:
+      213: -6417985972941373008
+    second: HumoLoop-Sheet_63
+  - first:
+      213: 7875809874042392086
+    second: HumoLoop-Sheet_64
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 12
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HumoLoop-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 168
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6692ec9fc6b862880800000000000000
+      internalID: -8636061935272580762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumoLoop-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 0
+        width: 168
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 440d4d28a8f6e4ca0800000000000000
+      internalID: -6030760210311360444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumoLoop-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 0
+        width: 168
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a0d702b913999740800000000000000
+      internalID: 5159316586699935908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumoLoop-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 0
+        width: 168
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 362b4adbb670119f0800000000000000
+      internalID: -499609924336831901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumoLoop-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 168
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 691dbd7e231027d80800000000000000
+      internalID: -8254533848866762346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumoLoop-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 0
+        width: 168
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1e22da6b6d2c4aa0800000000000000
+      internalID: -6175511049654882790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HumoLoop-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 0
+        width: 168
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82b3930b96482a0f0800000000000000
+      internalID: -1107176968916747480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 9ac3b0f49132a3f4a8ab4011e892aa40
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":7.0,"y":1.0},"gridSpriteSize":{"x":168.0,"y":120.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      HumoLoop-Sheet_0: -8636061935272580762
+      HumoLoop-Sheet_1: -6030760210311360444
+      HumoLoop-Sheet_2: 5159316586699935908
+      HumoLoop-Sheet_3: -499609924336831901
+      HumoLoop-Sheet_4: -8254533848866762346
+      HumoLoop-Sheet_5: -6175511049654882790
+      HumoLoop-Sheet_6: -1107176968916747480
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
