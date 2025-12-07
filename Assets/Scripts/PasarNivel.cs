@@ -29,7 +29,7 @@ public class PasarNivelPorPosicion : MonoBehaviour
             if (!GameManager.Instance.missionCompleted) return;
         }
 
-        if (jugador.position.x >= limiteX - 0.1f)
+        if (jugador.position.x >= limiteX - 0.3f)
         {
             StartCoroutine(LoadLevel());
             enabled = false;
