@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SimpleDialogue : MonoBehaviour
 {
@@ -33,6 +34,10 @@ public class SimpleDialogue : MonoBehaviour
     [Header("Flags (para OnFlagTrue)")]
     public MissionFlagsSO flags;             // Asset con banderas
     public FlagToWatch flagToWatch = FlagToWatch.None;
+
+    [Header("Eventos")]
+    public UnityEvent onDialogueFinished;
+
 
     public enum FlagToWatch
     {
@@ -153,6 +158,9 @@ public class SimpleDialogue : MonoBehaviour
         // Rehabilitar movimiento
         if (disableMovementDuringDialogue && movementComponent != null)
             movementComponent.enabled = true;
+
+        if (onDialogueFinished != null)
+            onDialogueFinished.Invoke();
 
         running = false;
     }
