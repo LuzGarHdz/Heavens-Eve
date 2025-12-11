@@ -3632,6 +3632,67 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1020099458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1020099460}
+  - component: {fileID: 1020099459}
+  m_Layer: 0
+  m_Name: MissionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1020099459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020099458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b361f52cd6d7f214d81b665d011f52ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissionManager
+  giftsTarget: 3
+  msgTalkToNPC: 'Habla con el NPC [E]'
+  msgFindGifts: Encontrar los regalos
+  msgGiftsProgress: '- Regalos: {0}/{1}'
+  msgGiftsFound: Regalos encontrados
+  msgDeliverGifts: Entregar los regalos
+  msgDeliverGiftsProgress: Entrega los regalos {0}/{1}
+  msgOpenCloset: Abre el closet
+  msgClosetCollect: Saca los peluches favoritos de tu hija
+  msgClosetDone: Peluche de Pinguino entregado
+  msgRepairBike: Repara la bici
+  msgPlaceDisk: Coloca el disco
+  missionText: {fileID: 1077562498}
+  missionTextTag: MissionText
+  currentPhase: 0
+  giftsCollected: 0
+  bosqueCompleted: 0
+--- !u!4 &1020099460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020099458}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -118.47109, y: 377.29254, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1044018390
 GameObject:
   m_ObjectHideFlags: 0
@@ -3944,6 +4005,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1020099459}
+        m_TargetAssemblyTypeName: MissionManager, Assembly-CSharp
+        m_MethodName: OnTalkedToNPC
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   disableMovementDuringDialogue: 0
   movementComponent: {fileID: 0}
 --- !u!114 &1044295646
@@ -4001,7 +4074,7 @@ GameObject:
   - component: {fileID: 1077562498}
   m_Layer: 5
   m_Name: Content
-  m_TagString: Untagged
+  m_TagString: MissionText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6098,7 +6171,7 @@ MonoBehaviour:
   charsPerSecond: 40
   useUnscaledTime: 1
   inputBlockSecondsOnStart: 0.12
-  advanceKeys: 200000000d00000065000000
+  advanceKeys: 200000000d0000006500000013010000
 --- !u!225 &1658455634
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -12044,7 +12117,7 @@ MonoBehaviour:
   regalosObjetivo: 3
   regalosActuales: 0
   timer: {fileID: 310233723}
-  missionDuration: 31
+  missionDuration: 30
   enemySpawnDelay: 10
   enemyController: {fileID: 477911185}
   playerHealth: {fileID: 1328393092}
@@ -12844,3 +12917,4 @@ SceneRoots:
   - {fileID: 1812209849}
   - {fileID: 2019041800}
   - {fileID: 2035467711}
+  - {fileID: 1020099460}

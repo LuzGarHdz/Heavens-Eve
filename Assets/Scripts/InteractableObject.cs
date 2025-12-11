@@ -96,6 +96,7 @@ public class InteractableObject : MonoBehaviour
             if (giftData != null && InventoryManager.Instance != null)
             {
                 InventoryManager.Instance.AddGift(giftData);
+                MissionManager.Instance.OnGiftCollected(giftData);
             }
             // Notificar al manager del bosque si existe en escena
             var bosqueManager = FindObjectOfType<MisionBosqueManager>();

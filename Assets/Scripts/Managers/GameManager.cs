@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject); // Mantener si deseas persistencia entre escenas
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {

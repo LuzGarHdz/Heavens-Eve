@@ -12,7 +12,7 @@ public class SimpleDialogue : MonoBehaviour
         OnInteract,     // Llamado por InteractableObject.Interact()
         OnFlagTrue      // Cuando cierta bandera de MissionFlagsSO se vuelve true
     }
-
+    
     [Header("UI")]
     public DialogueUI dialogueUI;            // Asigna el DialogueUI (mismo Canvas)
 

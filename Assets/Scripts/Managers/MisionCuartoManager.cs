@@ -11,7 +11,7 @@ public class MisionCuartoManager : MonoBehaviour
     public MissionFlagsSO flags;
 
     [Header("Inventario")]
-    public string pelucheGiftName = "Peluche";
+    public string pelucheGiftName = "Pinguino de Peluche";
 
     [Header("Misión")]
     public string missionTitle = "- Acomodar los peluches correctos";
@@ -38,6 +38,7 @@ public class MisionCuartoManager : MonoBehaviour
     public void OnClosetOpened()
     {
         Debug.Log("[MisionCuartoManager] Closet abierto.");
+        MissionManager.Instance.OnClosetOpened();
         // Aquí puedes pausar al jugador, mostrar hint, etc.
     }
 
@@ -71,14 +72,16 @@ public class MisionCuartoManager : MonoBehaviour
         }
 
         // Quitar del inventario el peluche
+        // remover casco del inventario
         if (InventoryManager.Instance != null)
         {
             bool removed = InventoryManager.Instance.RemoveGiftByName(pelucheGiftName);
-            Debug.Log($"[MisionCuartoManager] Remove '{pelucheGiftName}' del inventario: {removed}");
+            Debug.Log($"[BicycleRepairMission] Remove '{pelucheGiftName}' del inventario: {removed}");
         }
 
         InteractionManager.Instance?.ShowInteraction(missionCompletedText);
         var tocadiscos = FindObjectOfType<TocadiscosMission>();
         if (tocadiscos != null) tocadiscos.OnCoreMissionsStateChanged();
+        MissionManager.Instance.OnClosetMissionCompleted();
     }
 }
