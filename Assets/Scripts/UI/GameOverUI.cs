@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -71,7 +72,30 @@ public class GameOverUI : MonoBehaviour
     public void OnRestart()
     {
         Debug.Log("[GameOverUI] OnRestart pressed");
-        Hide();
+        SafeUnpause();
+
+        // Limpia singletons persistentes para que no arrastren estado viejo
+        DestroySingletonIfExists(InventoryManager.Instance);
+        DestroySingletonIfExists(MissionManager.Instance);
+        DestroySingletonIfExists(UIManagerSingleton());
+        DestroySingletonIfExists(AudioManager.Instance);
+
+        // Si tienes flags compartidos, aquí puedes resetearlos
+        MissionFlagsResetter.ResetAllFlags();
+
+        Scene current = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(current.name);
+    }
+
+    private void DestroySingletonIfExists(Component comp)
+    {
+        if (comp != null) Destroy(comp.gameObject);
+    }
+
+    // UIManager no expone instancia pública; lo resolvemos buscando el componente.
+    private UIManager UIManagerSingleton()
+    {
+        return FindObjectOfType<UIManager>();
     }
 
     public void OnMainMenu()

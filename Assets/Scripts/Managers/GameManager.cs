@@ -40,31 +40,31 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     private void Start()
     {
-        // Estado inicial
+        Time.timeScale = 1f;
         missionStarted = false;
         missionCompleted = false;
         regalosActuales = 0;
 
-        // Asegura que el enemigo no esté activo
         if (enemyController != null)
-        {
             enemyController.gameObject.SetActive(false);
-        }
 
-        // Bloquear recolección antes de hablar con NPC
         if (playerInteraction != null)
         {
             playerInteraction.interactionsLocked = true;
+            playerInteraction.enabled = true;
         }
 
-        // Timer oculto/inactivo al comienzo (lo controla el propio Timer + UI)
+        if (playerMovement != null)
+            playerMovement.enabled = true;
+
+        if (playerHealth != null)
+            playerHealth.ResetHealth(); // restaura corazones
+
         if (timer != null)
         {
-            // Dejar el Timer deshabilitado hasta que comience la misión desde el diálogo
-            timer.enabled = false;
+            timer.enabled = false;       // se activa tras diálogo
             timer.SetTime(missionDuration);
         }
     }
@@ -167,10 +167,10 @@ public class GameManager : MonoBehaviour
             gameOverUI.Show();
         }
     }
-
     public void RestartLevel()
     {
         Time.timeScale = 1f;
+        CancelInvoke();
         Scene current = SceneManager.GetActiveScene();
         SceneManager.LoadScene(current.name);
     }

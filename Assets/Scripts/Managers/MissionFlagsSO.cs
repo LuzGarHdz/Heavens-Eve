@@ -15,4 +15,11 @@ public class MissionFlagsSO : ScriptableObject
     {
         return bosqueCompleted && cuartoCompleted && sotanoBikeCompleted;
     }
+    public void ResetAll()
+    {
+        bosqueCompleted = false;
+        cuartoCompleted = false;
+        sotanoBikeCompleted = false;
+        tocadiscosCompleted = false;
+    }
 }

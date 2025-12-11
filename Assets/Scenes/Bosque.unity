@@ -5098,7 +5098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b1096c6f8a9de4c9ae40a16f91c71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHits: 4
+  maxHits: 5
   currentHits: 0
   hearts:
   - {fileID: 1463438842}
