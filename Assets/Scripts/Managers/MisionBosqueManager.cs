@@ -40,6 +40,14 @@ public class MisionBosqueManager : MonoBehaviour
             InteractionManager.Instance?.ShowInteraction(missionCompletedText);
             var tocadiscos = FindObjectOfType<TocadiscosMission>();
             if (tocadiscos != null) tocadiscos.OnCoreMissionsStateChanged();
+
+            // NUEVO: detener el timer y mostrar 00:00 cuando se hayan recolectado todos los regalos
+            Timer timer = FindObjectOfType<Timer>();
+            if (timer != null)
+            {
+                timer.StopCountdown();
+                timer.SetTime(0f);
+            }
         }
     }
 }

@@ -738,7 +738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   TimerText: {fileID: 310233724}
-  remaining_time: 31
+  remaining_time: 30
 --- !u!114 &310233724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3929,6 +3929,21 @@ MonoBehaviour:
   playerTag: Player
   flags: {fileID: 11400000, guid: 0ba26510bbc2b5e49847067f133d5a19, type: 2}
   flagToWatch: 1
+  onDialogueFinished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2019041799}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartMissionAfterDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   disableMovementDuringDialogue: 0
   movementComponent: {fileID: 0}
 --- !u!114 &1044295646
@@ -3956,6 +3971,9 @@ MonoBehaviour:
   playerTag: Player
   flags: {fileID: 11400000, guid: 0ba26510bbc2b5e49847067f133d5a19, type: 2}
   flagToWatch: 1
+  onDialogueFinished:
+    m_PersistentCalls:
+      m_Calls: []
   disableMovementDuringDialogue: 0
   movementComponent: {fileID: 0}
 --- !u!225 &1044295647
@@ -12026,7 +12044,7 @@ MonoBehaviour:
   regalosObjetivo: 3
   regalosActuales: 0
   timer: {fileID: 310233723}
-  missionDuration: 45
+  missionDuration: 31
   enemySpawnDelay: 10
   enemyController: {fileID: 477911185}
   playerHealth: {fileID: 1328393092}

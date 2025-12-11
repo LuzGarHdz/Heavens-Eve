@@ -7,10 +7,6 @@ public class GameOverUI : MonoBehaviour
     [Header("Panel")]
     public GameObject panel;
 
-    [Header("Escena")]
-    public SceneManager scene;
-
-
     [Header("Fade (opcional)")]
     public CanvasGroup canvasGroup;     // Asigna si quieres fade. Si es null, se muestra inmediato.
     public float fadeDuration = 0.35f;
@@ -22,7 +18,6 @@ public class GameOverUI : MonoBehaviour
 
     private void Awake()
     {
-        // Asegurar estado inicial
         if (panel != null) panel.SetActive(false);
         if (canvasGroup != null)
         {
@@ -44,12 +39,8 @@ public class GameOverUI : MonoBehaviour
     public void Show()
     {
         isVisible = true;
-
-        // Pausar juego
         Time.timeScale = 0f;
-
         if (panel != null) panel.SetActive(true);
-
         if (canvasGroup != null)
         {
             canvasGroup.blocksRaycasts = true;
@@ -62,10 +53,7 @@ public class GameOverUI : MonoBehaviour
     public void Hide()
     {
         isVisible = false;
-
-        // Reanudar juego
         Time.timeScale = 1f;
-
         if (canvasGroup != null)
         {
             canvasGroup.blocksRaycasts = false;
@@ -82,13 +70,8 @@ public class GameOverUI : MonoBehaviour
     // Botones UI
     public void OnRestart()
     {
-
-            SafeUnpause();
-            var scene = SceneManager.GetActiveScene();
-            SceneManager.UnloadSceneAsync(scene.name);
-            SceneManager.LoadScene(scene.name);
-            Hide();
-
+        Debug.Log("[GameOverUI] OnRestart pressed");
+        Hide();
     }
 
     public void OnMainMenu()
@@ -101,14 +84,8 @@ public class GameOverUI : MonoBehaviour
         else
         {
             SafeUnpause();
-            try
-            {
-                SceneManager.LoadScene("MainMenu");
-            }
-            catch
-            {
-                Debug.LogWarning("[GameOverUI] No existe escena 'MainMenu'. Implementa GameManager.GoToMainMenu o crea la escena.");
-            }
+            try { SceneManager.LoadScene("MainMenu"); }
+            catch { Debug.LogWarning("[GameOverUI] No existe escena 'MainMenu'."); }
         }
     }
 
@@ -129,10 +106,7 @@ public class GameOverUI : MonoBehaviour
         }
     }
 
-    private void SafeUnpause()
-    {
-        Time.timeScale = 1f;
-    }
+    private void SafeUnpause() { Time.timeScale = 1f; }
 
     private System.Collections.IEnumerator FadeCanvasGroup(CanvasGroup cg, float from, float to, float duration)
     {
@@ -140,7 +114,7 @@ public class GameOverUI : MonoBehaviour
         float t = 0f;
         while (t < duration)
         {
-            t += Time.unscaledDeltaTime; // usar tiempo no escalado porque estamos en pausa
+            t += Time.unscaledDeltaTime;
             cg.alpha = Mathf.Lerp(from, to, t / duration);
             yield return null;
         }

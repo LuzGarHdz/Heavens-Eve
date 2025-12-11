@@ -63,12 +63,13 @@ public class GameManager : MonoBehaviour
         // Timer oculto/inactivo al comienzo (lo controla el propio Timer + UI)
         if (timer != null)
         {
+            // Dejar el Timer deshabilitado hasta que comience la misión desde el diálogo
             timer.enabled = false;
             timer.SetTime(missionDuration);
         }
     }
 
-    // Llamado desde InteractionManager al hablar con NPC
+    // Llamado desde InteractionManager al hablar con NPC (cuando el jugador inicia la conversación)
     public void OnTalkedToNPC()
     {
         if (missionStarted) return;
@@ -81,6 +82,18 @@ public class GameManager : MonoBehaviour
             playerInteraction.interactionsLocked = false; // Puede recoger regalos
         }
 
+        // NO arrancar el timer ni spawnear el enemigo aquí.
+        // El Timer debe arrancar cuando termine el diálogo del NPC.
+        // SimpleDialogue.onDialogueFinished debe llamar a StartMissionAfterDialogue() en GameManager.
+    }
+
+    // Este método debe ser invocado por el evento onDialogueFinished del SimpleDialogue (inspector)
+    // para arrancar realmente la cuenta regresiva y programar el enemigo.
+    public void StartMissionAfterDialogue()
+    {
+        // Si la misión ya fue marcada como iniciada, seguimos; si no, marcamos.
+        if (!missionStarted) missionStarted = true;
+
         // Iniciar timer
         if (timer != null)
         {
@@ -88,7 +101,7 @@ public class GameManager : MonoBehaviour
             timer.StartCountdown();
         }
 
-        // Programar aparición de enemigo a los 10s
+        // Programar aparición del enemigo a los enemySpawnDelay segundos
         if (enemyController != null)
         {
             Invoke(nameof(SpawnEnemy), enemySpawnDelay);
