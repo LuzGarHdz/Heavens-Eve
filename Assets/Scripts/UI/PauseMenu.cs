@@ -9,6 +9,8 @@ public class PauseMenu : MonoBehaviour
 
     private static PauseMenu instance;
 
+    public string mainMenuSceneName = "MainMenu";
+    public bool cleanupPersistents = true;
 
 
 
@@ -51,16 +53,27 @@ public class PauseMenu : MonoBehaviour
             player.GetComponent<Movement>().enabled = false;
     }
 
-    public void LoadMainMenu()
+    public void GoToMainMenu()
     {
-        Time.timeScale = 1f; // Asegurarse de que el tiempo esté normalizado
-        SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1f;
+
+        if (cleanupPersistents)
+            CleanupPersistents();
+
+        SceneManager.LoadScene(mainMenuSceneName);
     }
 
-    public void QuitGame()
+    private void CleanupPersistents()
     {
-        Application.Quit();
+        DestroyIfExists(MissionManager.Instance);
+        DestroyIfExists(InventoryManager.Instance);
+        DestroyIfExists(AudioManager.Instance);
+        DestroyIfExists(FindObjectOfType<UIManager>()); // si no expone Instance
+        DestroyIfExists(FindObjectOfType<GameManager>());
     }
 
-
+    private void DestroyIfExists(Component comp)
+    {
+        if (comp != null) Destroy(comp.gameObject);
+    }
 }

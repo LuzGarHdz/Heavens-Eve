@@ -78,6 +78,7 @@ public class ClosetUI : MonoBehaviour
 
         if (pauseOnOpen) Time.timeScale = 0f;
         if (closetPanel) closetPanel.SetActive(true);
+        previewImage.enabled = false;
 
         missionManager?.OnClosetOpened();
         previewImage.enabled = false;
@@ -130,6 +131,7 @@ public class ClosetUI : MonoBehaviour
         isProcessing = true;
 
         // Preview
+        previewImage.enabled = true;
         if (previewImage) previewImage.sprite = data.detailSprite ? data.detailSprite : data.iconSprite;
         if (previewName) previewName.text = data.plushName;
 

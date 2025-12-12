@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TocadiscosMission : MonoBehaviour
 {
@@ -86,17 +87,6 @@ public class TocadiscosMission : MonoBehaviour
         // Debug.Log($"[TocadiscosMission] Gate visual -> unlocked={unlocked}");
     }
 
-    private void IntegrateAudio()
-    {
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlayTurntableTrack();
-        }
-        else
-        {
-            Debug.LogWarning("[TocadiscosMission] AudioManager.Instance es null, no se puede cambiar música.");
-        }
-    }
     // Llamado desde InteractableObject.Interact()
     public void TryActivate()
     {
@@ -124,9 +114,8 @@ public class TocadiscosMission : MonoBehaviour
         }
 
         // Colocar disco, animar y reproducir audio
-        PlaceDiskVisual();
-        StartSpinning();
-        IntegrateAudio();
+        AudioManager.Instance?.PlayFinalTrack();
+        SceneManager.LoadScene("CutsceneFinal");
 
         activated = true;
         if (flags != null) flags.tocadiscosCompleted = true;

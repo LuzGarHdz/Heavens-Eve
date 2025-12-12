@@ -23,6 +23,11 @@ public class DragAndDropMinigame : MonoBehaviour
     public float timeLimitSeconds = 40f;
     public TMP_Text timerText;
 
+    public bool useSharedTimer = false;
+    public float sharedTimerSeconds = 10f;
+    public string sharedTimerTag = "GameTimer";
+    private Timer sharedTimer;
+
     [Header("Mensajes")]
     public TMP_Text progressText;
     public string progressFormat = "{0}/{1}";
@@ -86,49 +91,149 @@ public class DragAndDropMinigame : MonoBehaviour
             Debug.LogWarning("[DragAndDropMinigame] stateSprites vacío; no se actualizará imagen de estado.");
     }
 
+    private string FormatTime(float t)
+    {
+        int m = Mathf.FloorToInt(t / 60f);
+        int s = Mathf.FloorToInt(t % 60f);
+        return $"{m:00}:{s:00}";
+    }
+
+    /* public void StartMinigame()
+     {
+         StartMiniggameValidation();
+
+         placed.Clear();
+         timeLeft = timeLimitSeconds;
+         running = true;
+
+         Debug.Log($"[DragAndDropMinigame] Start. timeLimit={timeLimitSeconds}s useTimer={useTimer}");
+
+         foreach (var d in items)
+         {
+             if (d == null) continue;
+             var rt = d.GetComponent<RectTransform>();
+             rt.SetParent(itemsContainer, worldPositionStays: false);
+             // respetar layout
+             d.gameObject.SetActive(true); // asegurar visibles al iniciar
+         }
+
+         UpdateStateSprite();
+         UpdateProgressUI();
+         UpdateTimerUI();
+     }
+
+     private void Update()
+     {
+         if (!running || !useTimer) return;
+
+         float dt = Time.unscaledDeltaTime;
+         timeLeft -= dt;
+         if (timeLeft <= 0f)
+         {
+             timeLeft = 0f;
+             running = false;
+             UpdateTimerUI();
+             Debug.Log("[DragAndDropMinigame] Time expired. Failing.");
+             OnFailed?.Invoke();
+         }
+         else
+         {
+             UpdateTimerUI();
+         }
+     }
+    */
+
     public void StartMinigame()
     {
         StartMiniggameValidation();
 
         placed.Clear();
-        timeLeft = timeLimitSeconds;
         running = true;
 
-        Debug.Log($"[DragAndDropMinigame] Start. timeLimit={timeLimitSeconds}s useTimer={useTimer}");
-
-        foreach (var d in items)
+        if (useSharedTimer)
         {
-            if (d == null) continue;
-            var rt = d.GetComponent<RectTransform>();
-            rt.SetParent(itemsContainer, worldPositionStays: false);
-            // respetar layout
-            d.gameObject.SetActive(true); // asegurar visibles al iniciar
+            if (sharedTimer == null)
+                sharedTimer = FindSharedTimer();
+
+            if (sharedTimer != null)
+            {
+                useTimer = false;                 // desactiva timer local
+                sharedTimer.useUnscaledTime = true; // el minijuego pausa timeScale
+                sharedTimer.onExpired = OnSharedTimerExpired;
+                sharedTimer.SetTime(sharedTimerSeconds);
+                sharedTimer.StartCountdown();
+            }
+            else
+            {
+                Debug.LogWarning("[DragAndDropMinigame] useSharedTimer activo pero no se encontró Timer con tag " + sharedTimerTag);
+            }
+        }
+        else
+        {
+            timeLeft = timeLimitSeconds;
+            if (timerText != null && useTimer)
+                timerText.text = FormatTime(timeLeft);
         }
 
-        UpdateStateSprite();
+        Debug.Log($"[DragAndDropMinigame] Start. useSharedTimer={useSharedTimer} seconds={(useSharedTimer ? sharedTimerSeconds : timeLimitSeconds)}");
         UpdateProgressUI();
-        UpdateTimerUI();
+    }
+
+    private Timer FindSharedTimer()
+    {
+        var go = GameObject.FindGameObjectWithTag(sharedTimerTag);
+        if (go == null) return null;
+        return go.GetComponent<Timer>();
     }
 
     private void Update()
     {
-        if (!running || !useTimer) return;
+        if (!running) return;
 
-        float dt = Time.unscaledDeltaTime;
-        timeLeft -= dt;
-        if (timeLeft <= 0f)
+        if (useSharedTimer && sharedTimer != null)
         {
-            timeLeft = 0f;
-            running = false;
-            UpdateTimerUI();
-            Debug.Log("[DragAndDropMinigame] Time expired. Failing.");
-            OnFailed?.Invoke();
+            // el timer compartido controla el tiempo; no hacemos nada aquí
+            return;
         }
-        else
+
+        if (useTimer)
         {
-            UpdateTimerUI();
+            if (timeLeft > 0)
+            {
+                timeLeft -= Time.deltaTime;
+                if (timeLeft < 0) timeLeft = 0;
+                if (timerText != null) timerText.text = FormatTime(timeLeft);
+            }
+            else
+            {
+                running = false;
+                OnFailed?.Invoke();
+            }
         }
     }
+
+    private void OnSharedTimerExpired()
+    {
+        if (!running) return;
+        running = false;
+        OnFailed?.Invoke();
+    }
+
+    private void StopSharedTimer()
+    {
+        if (sharedTimer != null)
+        {
+            sharedTimer.StopCountdown();
+            sharedTimer.onExpired = null;
+        }
+    }
+
+    public void StopMinigame()
+    {
+        running = false;
+        StopSharedTimer();
+    }
+
 
     public void TryPlace(DraggableItemUI item, DropZoneUI zone)
     {

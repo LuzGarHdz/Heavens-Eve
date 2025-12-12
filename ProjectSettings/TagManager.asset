@@ -7,6 +7,8 @@ TagManager:
   - Interactable
   - NPC
   - MissionText
+  - HeartsContainer
+  - GameTimer
   layers:
   - Default
   - TransparentFX

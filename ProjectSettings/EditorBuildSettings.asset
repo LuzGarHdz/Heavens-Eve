@@ -23,6 +23,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sotano.unity
     guid: 6701ac12f43f62e40886a76275b75f24
+  - enabled: 1
+    path: Assets/Scenes/CutsceneFinal.unity
+    guid: 47bbd0f1b9455e24486032007af6272a
+  - enabled: 1
+    path: Assets/Scenes/CutsceneIntro.unity
+    guid: 53474032f11676346aa313980dd2fdb1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

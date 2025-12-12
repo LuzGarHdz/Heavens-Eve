@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -5,6 +6,10 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI TimerText;
     [SerializeField] float remaining_time;
+
+    [Header("Opciones")]
+    public bool useUnscaledTime = false;
+    public Action onExpired;  // callback opcional
 
     private bool running = false;
 
@@ -29,16 +34,18 @@ public class Timer : MonoBehaviour
     {
         if (!running) return;
 
+        float dt = useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+
         if (remaining_time > 0)
         {
-            remaining_time -= Time.deltaTime;
+            remaining_time -= dt;
         }
         else
         {
             remaining_time = 0;
             running = false;
-            // Avisar al GameManager que se acabó el tiempo
-            GameManager.Instance.OnTimeExpired();
+            if (onExpired != null) onExpired.Invoke();
+            else GameManager.Instance?.OnTimeExpired();
         }
 
         UpdateText();

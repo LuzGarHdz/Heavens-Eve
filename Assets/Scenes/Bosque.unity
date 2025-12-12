@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 25925389}
   - component: {fileID: 25925391}
   - component: {fileID: 25925390}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,7 +267,8 @@ GameObject:
   - component: {fileID: 40997826}
   - component: {fileID: 40997825}
   - component: {fileID: 40997824}
-  m_Layer: 5
+  - component: {fileID: 40997827}
+  m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,6 +389,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40997822}
   m_CullTransparentMesh: 1
+--- !u!223 &40997827
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 40997822}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 500
+  m_TargetDisplay: 0
 --- !u!1 &107588806
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +454,7 @@ GameObject:
   - component: {fileID: 210786453}
   - component: {fileID: 210786455}
   - component: {fileID: 210786454}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -567,7 +591,7 @@ GameObject:
   - component: {fileID: 240884223}
   - component: {fileID: 240884222}
   - component: {fileID: 240884224}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Objeto 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,9 +723,9 @@ GameObject:
   - component: {fileID: 310233725}
   - component: {fileID: 310233724}
   - component: {fileID: 310233723}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Time
-  m_TagString: Untagged
+  m_TagString: GameTimer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -739,6 +763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   TimerText: {fileID: 310233724}
   remaining_time: 30
+  useUnscaledTime: 0
 --- !u!114 &310233724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,7 +953,7 @@ GameObject:
   - component: {fileID: 335865451}
   - component: {fileID: 335865453}
   - component: {fileID: 335865452}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1003,7 +1028,7 @@ GameObject:
   - component: {fileID: 369615981}
   - component: {fileID: 369615983}
   - component: {fileID: 369615982}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1140,7 +1165,7 @@ GameObject:
   - component: {fileID: 372786550}
   - component: {fileID: 372786549}
   - component: {fileID: 372786548}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1397,7 +1422,9 @@ GameObject:
   m_Component:
   - component: {fileID: 451422549}
   - component: {fileID: 451422550}
-  m_Layer: 5
+  - component: {fileID: 451422551}
+  - component: {fileID: 451422552}
+  m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1437,6 +1464,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
   pauseMenuUI: {fileID: 915108975}
+  mainMenuSceneName: MainMenu
+  cleanupPersistents: 1
+--- !u!223 &451422551
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451422548}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 150
+  m_TargetDisplay: 0
+--- !u!114 &451422552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451422548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &477911179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,9 +1727,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 478833157}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health
-  m_TagString: Untagged
+  m_TagString: HeartsContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1856,7 +1925,7 @@ GameObject:
   - component: {fileID: 573570887}
   - component: {fileID: 573570889}
   - component: {fileID: 573570888}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: detailNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1879,8 +1948,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1173, y: -38.711}
-  m_SizeDelta: {x: 1135.7, y: 77.421}
+  m_AnchoredPosition: {x: -1167.5, y: -36.877}
+  m_SizeDelta: {x: 1146.7, y: 73.752}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &573570888
 MonoBehaviour:
@@ -2076,7 +2145,7 @@ GameObject:
   - component: {fileID: 633385949}
   - component: {fileID: 633385951}
   - component: {fileID: 633385950}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Misiones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2115,7 +2184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0.96470594, a: 0.16470589}
+  m_Color: {r: 0.16814645, g: 0, b: 0.381132, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2152,7 +2221,8 @@ GameObject:
   - component: {fileID: 662417539}
   - component: {fileID: 662417538}
   - component: {fileID: 662417537}
-  m_Layer: 5
+  - component: {fileID: 662417540}
+  m_Layer: 0
   m_Name: Salir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2273,6 +2343,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662417535}
   m_CullTransparentMesh: 1
+--- !u!223 &662417540
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662417535}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 500
+  m_TargetDisplay: 0
 --- !u!1 &677809901
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,7 +2515,7 @@ GameObject:
   - component: {fileID: 678139626}
   - component: {fileID: 678139625}
   - component: {fileID: 678139624}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Jugar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2554,7 +2647,9 @@ GameObject:
   - component: {fileID: 719981550}
   - component: {fileID: 719981549}
   - component: {fileID: 719981551}
-  m_Layer: 5
+  - component: {fileID: 719981552}
+  - component: {fileID: 719981553}
+  m_Layer: 0
   m_Name: GameOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2638,6 +2733,46 @@ MonoBehaviour:
   canvasGroup: {fileID: 2072408135}
   fadeDuration: 0.35
   enableKeyboardShortcuts: 1
+--- !u!223 &719981552
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719981547}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 500
+  m_TargetDisplay: 0
+--- !u!114 &719981553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719981547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &729559832
 GameObject:
   m_ObjectHideFlags: 0
@@ -2649,7 +2784,7 @@ GameObject:
   - component: {fileID: 729559833}
   - component: {fileID: 729559835}
   - component: {fileID: 729559834}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2785,7 +2920,7 @@ GameObject:
   - component: {fileID: 765141440}
   - component: {fileID: 765141442}
   - component: {fileID: 765141441}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: continue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2922,7 +3057,7 @@ GameObject:
   - component: {fileID: 776739392}
   - component: {fileID: 776739391}
   - component: {fileID: 776739393}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Objeto 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3203,7 +3338,7 @@ GameObject:
   - component: {fileID: 873182038}
   - component: {fileID: 873182040}
   - component: {fileID: 873182039}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health-5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3278,7 +3413,7 @@ GameObject:
   - component: {fileID: 915108976}
   - component: {fileID: 915108978}
   - component: {fileID: 915108977}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3356,7 +3491,7 @@ GameObject:
   - component: {fileID: 977617361}
   - component: {fileID: 977617363}
   - component: {fileID: 977617362}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: dialogText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3495,7 +3630,7 @@ GameObject:
   - component: {fileID: 1018910549}
   - component: {fileID: 1018910553}
   - component: {fileID: 1018910555}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3563,7 +3698,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &1018910552
 RectTransform:
@@ -3578,13 +3713,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1401155342}
+  - {fileID: 633385949}
   - {fileID: 1336750203}
   - {fileID: 1077562497}
   - {fileID: 1783671122}
   - {fileID: 310233722}
   - {fileID: 1280557574}
   - {fileID: 478833157}
-  - {fileID: 633385949}
   - {fileID: 1133419519}
   - {fileID: 1591764513}
   - {fileID: 372786547}
@@ -3664,7 +3799,7 @@ MonoBehaviour:
   giftsTarget: 3
   msgTalkToNPC: 'Habla con el NPC [E]'
   msgFindGifts: Encontrar los regalos
-  msgGiftsProgress: '- Regalos: {0}/{1}'
+  msgGiftsProgress: 'Regalos: {0}/{1}'
   msgGiftsFound: Regalos encontrados
   msgDeliverGifts: Entregar los regalos
   msgDeliverGiftsProgress: Entrega los regalos {0}/{1}
@@ -3672,9 +3807,12 @@ MonoBehaviour:
   msgClosetCollect: Saca los peluches favoritos de tu hija
   msgClosetDone: Peluche de Pinguino entregado
   msgRepairBike: Repara la bici
+  msgBikeDone: Bici reparada
   msgPlaceDisk: Coloca el disco
+  msgDiskPlaced: Tocadiscos activado
   missionText: {fileID: 1077562498}
   missionTextTag: MissionText
+  flagsAsset: {fileID: 11400000, guid: 0ba26510bbc2b5e49847067f133d5a19, type: 2}
   currentPhase: 0
   giftsCollected: 0
   bosqueCompleted: 0
@@ -3704,7 +3842,7 @@ GameObject:
   - component: {fileID: 1044018391}
   - component: {fileID: 1044018393}
   - component: {fileID: 1044018392}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Detalle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4072,7 +4210,7 @@ GameObject:
   - component: {fileID: 1077562497}
   - component: {fileID: 1077562499}
   - component: {fileID: 1077562498}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Content
   m_TagString: MissionText
   m_Icon: {fileID: 0}
@@ -4210,7 +4348,7 @@ GameObject:
   - component: {fileID: 1133419521}
   - component: {fileID: 1133419524}
   - component: {fileID: 1133419523}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: InventoryPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4313,7 +4451,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 125
   m_TargetDisplay: 0
 --- !u!1 &1137164766
 GameObject:
@@ -4326,7 +4464,7 @@ GameObject:
   - component: {fileID: 1137164767}
   - component: {fileID: 1137164769}
   - component: {fileID: 1137164768}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: detailDescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4349,8 +4487,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1173, y: -318}
-  m_SizeDelta: {x: 1135.654, y: 323.538}
+  m_AnchoredPosition: {x: -1167.4968, y: -467}
+  m_SizeDelta: {x: 1146.706, y: 614.259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1137164768
 MonoBehaviour:
@@ -4372,7 +4510,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e3108c47c289794cb8669822be38ce2, type: 2}
   m_sharedMaterial: {fileID: 4031824241913296761, guid: 2e3108c47c289794cb8669822be38ce2, type: 2}
@@ -4406,7 +4544,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 16
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4416,7 +4554,7 @@ MonoBehaviour:
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
-  m_wordWrappingRatios: 0.4
+  m_wordWrappingRatios: 0.098
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
@@ -4462,7 +4600,7 @@ GameObject:
   - component: {fileID: 1199320001}
   - component: {fileID: 1199320003}
   - component: {fileID: 1199320002}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: dialogBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4628,7 +4766,7 @@ GameObject:
   - component: {fileID: 1280557576}
   - component: {fileID: 1280557575}
   - component: {fileID: 1280557577}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TimerBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5120,7 +5258,7 @@ GameObject:
   - component: {fileID: 1336750203}
   - component: {fileID: 1336750205}
   - component: {fileID: 1336750204}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Misiones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5257,7 +5395,8 @@ GameObject:
   - component: {fileID: 1367246404}
   - component: {fileID: 1367246403}
   - component: {fileID: 1367246402}
-  m_Layer: 5
+  - component: {fileID: 1367246405}
+  m_Layer: 0
   m_Name: Reiniciar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5378,6 +5517,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367246400}
   m_CullTransparentMesh: 1
+--- !u!223 &1367246405
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367246400}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 500
+  m_TargetDisplay: 0
 --- !u!1 &1401155341
 GameObject:
   m_ObjectHideFlags: 0
@@ -5390,7 +5552,7 @@ GameObject:
   - component: {fileID: 1401155345}
   - component: {fileID: 1401155344}
   - component: {fileID: 1401155343}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: TextPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5481,7 +5643,7 @@ GameObject:
   - component: {fileID: 1463438841}
   - component: {fileID: 1463438843}
   - component: {fileID: 1463438842}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health-4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5647,7 +5809,7 @@ GameObject:
   - component: {fileID: 1570628742}
   - component: {fileID: 1570628744}
   - component: {fileID: 1570628743}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5723,7 +5885,7 @@ GameObject:
   - component: {fileID: 1591764516}
   - component: {fileID: 1591764515}
   - component: {fileID: 1591764514}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5856,7 +6018,7 @@ GameObject:
   - component: {fileID: 1597491170}
   - component: {fileID: 1597491169}
   - component: {fileID: 1597491171}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Objeto 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6124,7 +6286,7 @@ GameObject:
   - component: {fileID: 1658455632}
   - component: {fileID: 1658455634}
   - component: {fileID: 1658455633}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: DialogueUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6309,7 +6471,7 @@ GameObject:
   - component: {fileID: 1730676845}
   - component: {fileID: 1730676844}
   - component: {fileID: 1730676843}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Salir
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6381,7 +6543,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 451422550}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: LoadMainMenu
+        m_MethodName: GoToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6470,7 +6632,7 @@ Transform:
   m_GameObject: {fileID: 1744958953}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -488.03522, y: -869.7823, z: 42.29075}
+  m_LocalPosition: {x: -488.03516, y: -869.7823, z: 42.29075}
   m_LocalScale: {x: 4.229075, y: 4.229075, z: 4.229075}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6488,7 +6650,7 @@ GameObject:
   - component: {fileID: 1783671122}
   - component: {fileID: 1783671124}
   - component: {fileID: 1783671123}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Timer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11414,7 +11576,7 @@ GameObject:
   - component: {fileID: 1828488397}
   - component: {fileID: 1828488399}
   - component: {fileID: 1828488398}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: detailImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11489,7 +11651,7 @@ GameObject:
   - component: {fileID: 1858805004}
   - component: {fileID: 1858805006}
   - component: {fileID: 1858805005}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11565,7 +11727,7 @@ GameObject:
   - component: {fileID: 1870789297}
   - component: {fileID: 1870789296}
   - component: {fileID: 1870789295}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Opciones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11684,7 +11846,7 @@ GameObject:
   - component: {fileID: 1887999638}
   - component: {fileID: 1887999640}
   - component: {fileID: 1887999639}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11820,7 +11982,7 @@ GameObject:
   - component: {fileID: 1945079352}
   - component: {fileID: 1945079351}
   - component: {fileID: 1945079350}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: InteractionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12153,8 +12315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MisionBosqueManager
   flags: {fileID: 11400000, guid: 0ba26510bbc2b5e49847067f133d5a19, type: 2}
-  missionTitle: '- Encontrar los 3 regalos'
-  missionCompletedText: '- Regalos encontrados'
   totalGifts: 3
 --- !u!1 &2029900191
 GameObject:
@@ -12237,7 +12397,7 @@ CanvasGroup:
   m_GameObject: {fileID: 2029900191}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
+  m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &2035258824
@@ -12354,7 +12514,7 @@ GameObject:
   - component: {fileID: 2044104948}
   - component: {fileID: 2044104947}
   - component: {fileID: 2044104949}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Objeto 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12485,7 +12645,6 @@ GameObject:
   - component: {fileID: 2072408130}
   - component: {fileID: 2072408133}
   - component: {fileID: 2072408132}
-  - component: {fileID: 2072408131}
   - component: {fileID: 2072408135}
   m_Layer: 0
   m_Name: Canvas
@@ -12503,7 +12662,7 @@ RectTransform:
   m_GameObject: {fileID: 2072408129}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 0.23645835, y: 0.23645835, z: 0.23645835}
+  m_LocalScale: {x: 0.23645833, y: 0.23645833, z: 0.23645833}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2072739085}
@@ -12512,25 +12671,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 630.9442, y: 275.05118}
-  m_SizeDelta: {x: 3839.9998, y: 2159.3655}
+  m_SizeDelta: {x: 3840, y: 2160}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2072408131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2072408129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 3
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &2072408132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12575,7 +12717,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 200
   m_TargetDisplay: 0
 --- !u!225 &2072408135
 CanvasGroup:
@@ -12587,7 +12729,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!1 &2072739084
 GameObject:
@@ -12675,7 +12817,7 @@ GameObject:
   - component: {fileID: 2113699493}
   - component: {fileID: 2113699495}
   - component: {fileID: 2113699494}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

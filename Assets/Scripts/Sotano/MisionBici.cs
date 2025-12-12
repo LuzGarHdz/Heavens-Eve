@@ -46,6 +46,13 @@ public class BicycleRepairMission : MonoBehaviour
 
         if (pauseOnOpen) Time.timeScale = 0f;
 
+        // Usar el timer general (tag GameTimer) con 10s para el minijuego
+        if (minigame != null)
+        {
+            minigame.useSharedTimer = true;
+            minigame.sharedTimerSeconds = 10f;
+        }
+
         if (dialogueUI != null)
         {
             dialogueUI.HideImmediate();
@@ -65,6 +72,20 @@ public class BicycleRepairMission : MonoBehaviour
         minigame.StartMinigame();
     }
 
+    private void Start()
+    {
+        if (flags == null)
+            flags = Resources.Load<MissionFlagsSO>("MissionFlags");
+
+        if (flags != null && flags.sotanoBikeCompleted)
+        {
+            completed = true;
+            UpdateBikeSprite();      // deja la bici reparada visible
+                                     // Opcional: desactiva el panel/minijuego si existe
+            if (panel != null) panel.SetActive(false);
+        }
+    }
+
     public void Close()
     {
         if (!opening) return;
@@ -73,6 +94,7 @@ public class BicycleRepairMission : MonoBehaviour
         if (pauseOnOpen) Time.timeScale = 1f;
         if (minigame != null)
         {
+            minigame.StopMinigame(); // detiene el timer compartido
             minigame.OnCompleted = null;
             minigame.OnFailed = null;
         }
@@ -84,11 +106,12 @@ public class BicycleRepairMission : MonoBehaviour
         if (flags != null)
         {
             flags.sotanoBikeCompleted = true;
-            Debug.Log("[BicycleRepairMission] sotanoBikeCompleted = TRUE");
             var tocadiscos = FindObjectOfType<TocadiscosMission>();
             if (tocadiscos != null) tocadiscos.OnCoreMissionsStateChanged();
-
         }
+        // NUEVO: Notificar al MissionManager para actualizar texto
+        MissionManager.Instance?.OnBikeRepaired();
+
         Close();
         UpdateBikeSprite();
         // remover casco del inventario

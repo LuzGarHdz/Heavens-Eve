@@ -75,7 +75,7 @@ public class MisionCuartoManager : MonoBehaviour
         // remover casco del inventario
         if (InventoryManager.Instance != null)
         {
-            bool removed = InventoryManager.Instance.RemoveGiftByName(pelucheGiftName);
+            bool removed = InventoryManager.Instance.RemoveGiftByName("Pinguino de Peluche");
             Debug.Log($"[BicycleRepairMission] Remove '{pelucheGiftName}' del inventario: {removed}");
         }
 

@@ -6,8 +6,8 @@ public class MisionBosqueManager : MonoBehaviour
     public MissionFlagsSO flags;
 
     [Header("Misión")]
-    public string missionTitle = "- Encontrar los 3 regalos";
-    public string missionCompletedText = "- Regalos encontrados";
+    //public string missionTitle = "- Encontrar los 3 regalos";
+    //public string missionCompletedText = "- Regalos encontrados";
     public int totalGifts = 3;
 
     private int giftsFound = 0;
@@ -15,7 +15,7 @@ public class MisionBosqueManager : MonoBehaviour
 
     private void Start()
     {
-        InteractionManager.Instance?.ShowInteraction(missionTitle);
+        // InteractionManager.Instance?.ShowInteraction(missionTitle);
         if (flags == null) Debug.LogError("[MisionBosqueManager] flags es NULL. Asigna el asset MissionFlags.");
     }
 
@@ -25,7 +25,7 @@ public class MisionBosqueManager : MonoBehaviour
 
         giftsFound++;
         Debug.Log($"[MisionBosqueManager] Gift encontrado. Progreso {giftsFound}/{totalGifts}");
-        InteractionManager.Instance?.ShowInteraction($"{missionTitle} ({giftsFound}/{totalGifts})");
+        //InteractionManager.Instance?.ShowInteraction($"{missionTitle} ({giftsFound}/{totalGifts})");
 
         if (giftsFound >= totalGifts)
         {
@@ -37,7 +37,7 @@ public class MisionBosqueManager : MonoBehaviour
                 Debug.Log("[MisionBosqueManager] bosqueCompleted = TRUE");
             }
 
-            InteractionManager.Instance?.ShowInteraction(missionCompletedText);
+            // InteractionManager.Instance?.ShowInteraction(missionCompletedText);
             var tocadiscos = FindObjectOfType<TocadiscosMission>();
             if (tocadiscos != null) tocadiscos.OnCoreMissionsStateChanged();
 
